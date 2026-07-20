@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabarito - MeuTube Premium</title>
+    
+    <style>
+        /* =======================================================
+           1. CONFIGURAÇÕES GERAIS (RESET E TEMA ESCURO)
+           Atua em toda a página. Zera margens e força o Box Model
+           correto (border-box) em todos os elementos.
+           ======================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Garante que padding e border não alterem o tamanho total da caixa */
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #0f0f0f; /* Fundo oficial do YouTube Dark Mode */
+            color: #ffffff;            /* Texto branco para contrastar com o fundo escuro */
+            overflow-x: hidden;
+        }
+
+        /* =======================================================
+           2. CABEÇALHO (HEADER)
+           Usa FLEXBOX para alinhar o Logo, a Barra de Busca e o Perfil
+           em uma linha horizontal perfeita, distribuindo os espaços.
+           ======================================================= */
+        #cabecalho-principal {
+            display: flex;
+            justify-content: space-between; /* Empurra os blocos para as extremidades esquerda, centro e direita */
+            align-items: center;            /* Centraliza os elementos verticalmente */
+            background-color: #0f0f0f;
+            padding: 12px 24px;
+            position: fixed;                /* Fixa o cabeçalho no topo da tela ao rolar a página */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 100;                   /* Garante que o cabeçalho fique por cima dos vídeos */
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: -1px;
+            cursor: pointer;
+        }
+
+        .logo-box span {
+            color: #ff0000; /* Ícone ou texto em vermelho destaque */
+        }
+
+        /* Barra de Busca Estilizada */
+        .busca-box {
+            display: flex;
+            width: 40%;
+        }
+
+        .busca-box input {
+            width: 100%;
+            padding: 10px 16px;
+            background-color: #121212;
+            border: 1px solid #303030;
+            border-radius: 40px 0 0 40px; /* Arredonda apenas o lado esquerdo */
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .busca-box input:focus {
+            border-color: #1c62b9; /* Borda azul ao clicar, igual ao YouTube original */
+        }
+
+        .busca-box button {
+            padding: 0 20px;
+            background-color: #222222;
+            border: 1px solid #303030;
+            border-left: none; /* Remove a linha divisória entre o input e o botão */
+            border-radius: 0 40px 40px 0; /* Arredonda apenas o lado direito */
+            color: white;
+            cursor: pointer;
+        }
+
+        .busca-box button:hover {
+            background-color: #272727;
+        }
+
+        .perfil-mock {
+            width: 35px;
+            height: 35px;
+            background-color: #5c6bc0;
+            border-radius: 50%; /* Transforma o bloco quadrado em um círculo perfeito */
+            cursor: pointer;
+        }
+
+        /* =======================================================
+           3. ESTRUTURA DE LAYOUT (CORPO DO SITE)
+           Usa FLEXBOX para colocar o Menu Lateral fixo à esquerda
+           e a Grade de Vídeos flexível à direita.
+           ======================================================= */
+        #layout-container {
+            display: flex;
+            margin-top: 60px; /* Evita que o conteúdo suma por baixo do cabeçalho fixo */
+        }
+
+        /* Barra Lateral (Sidebar) */
+        #barra-lateral {
+            width: 240px;
+            height: calc(100vh - 60px); /* Ocupa exatamente a altura restante da tela */
+            background-color: #0f0f0f;
+            padding: 12px;
+            position: fixed;            /* Deixa o menu travado na lateral esquerda */
+            left: 0;
+            top: 60px;
+        }
+
+        #barra-lateral ul {
+            list-style-type: none; /* Aplicação da Aula 5.2: Remove as marcações de lista */
+        }
+
+        #barra-lateral li {
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s; /* Suaviza a transição de cor no hover */
+        }
+
+        /* Efeito Hover nas Opções do Menu */
+        #barra-lateral li:hover {
+            background-color: #272727; 
+        }
+
+        /* Classe ativa para simular onde o usuário está navegando */
+        #barra-lateral li.ativo {
+            background-color: #272727;
+            font-weight: bold;
+        }
+
+        /* =======================================================
+           4. ÁREA DOS VÍDEOS (CSS GRID RESPONSIVO)
+           A mágica do layout: calcula automaticamente quantas colunas
+           de no mínimo 300px cabem na tela do usuário.
+           ======================================================= */
+        #conteudo-videos {
+            flex-grow: 1;               /* Faz o bloco ocupar todo o espaço restante da tela */
+            margin-left: 240px;         /* Empurra o conteúdo para não ficar embaixo da barra lateral fixa */
+            padding: 24px;
+        }
+
+        .grade-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsividade automática */
+            gap: 40px 16px; /* 40px de espaço vertical entre as linhas, 16px horizontal entre as colunas */
+        }
+
+        /* =======================================================
+           5. CARTÃO DE VÍDEO (BOX MODEL)
+           Aplica espaçamentos internos, bordas arredondadas e efeitos
+           visuais ao passar o mouse.
+           ======================================================= */
+        .cartao-video {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        /* Responsável pela proporção e contorno do Vídeo */
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px; /* Bordas arredondadas modernas nos vídeos */
+            overflow: hidden;    /* Esconde as pontas quadradas do iframe interno */
+            margin-bottom: 12px; /* Margem externa inferior (Separando o vídeo dos textos) */
+            background-color: #000;
+            transition: transform 0.3s;
+        }
+
+        .cartao-video:hover .video-wrapper {
+            transform: scale(1.02); /* Efeito discreto de zoom ao passar o mouse */
+        }
+
+        .cartao-video iframe {
+            width: 100%;
+            display: block;
+            border: none; /* Remove qualquer borda padrão estranha do iframe */
+        }
+
+        /* Alinhamento de Textos abaixo do Vídeo */
+        .info-video {
+            display: flex;
+            gap: 12px;
+        }
+
+        .canal-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #ff5722;
+            border-radius: 50%;
+            flex-shrink: 0; /* Impede que o avatar seja esmagado se o título for muito grande */
+        }
+
+        .textos-video h3 {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 22px;
+            margin-bottom: 6px;
+            color: #f1f1f1;
+            /* Limita o título em duas linhas caso seja muito longo */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .textos-video p {
+            font-size: 14px;
+            color: #aaa; /* Cor cinza clara para metadados secundários */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. CABEÇALHO DO SITE -->
+    <header id="cabecalho-principal">
+        <div class="logo-box">
+            <span>🔴</span> MeuTube
+        </div>
+        
+        <div class="busca-box">
+            <input type="text" placeholder="Pesquisar">
+            <button>🔍</button>
+        </div>
+
+        <div class="perfil-mock"></div>
+    </header>
+
+    <!-- CONTAINER DO LAYOUT -->
+    <div id="layout-container">
+
+        <!-- 2. BARRA LATERAL (SIDEBAR) -->
+        <nav id="barra-lateral">
+            <ul>
+                <li class="ativo">🏠 Início</li>
+                <li>🩳 Shorts</li>
+                <li>🔥 Em Alta</li>
+                <li>📁 Inscrições</li>
+                <hr style="border: 0; border-top: 1px solid #303030; margin: 10px 0;">
+                <li>📚 Biblioteca</li>
+                <li>⏳ Histórico</li>
+                <li>🎬 Seus Vídeos</li>
+            </ul>
+        </nav>
+
+        <!-- 3. GRADE DE VÍDEOS -->
+        <main id="conteudo-videos">
+            <div class="grade-videos">
+
+                <!-- CARTÃO 1 -->
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <!-- Exemplo clássico com Rickroll para testes -->
+<iframe src="https://www.youtube.com/embed/TLkA0RelQ1g" title="Vídeo de Teste 2" allowfullscreen></iframe>                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #e91e63;"></div>
+                        <div class="textos-video">
+                            <h3>Aprenda Web Design do Zero ao Avançado em Poucas Semanas</h3>
+                            <p>Professor Tutor</p>
+                            <p>15 mil visualizações • há 2 dias</p>
+                        </div>
+                    </div>
+                </div>
+
+               <!-- CARTÃO 2 (CORRIGIDO) -->
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                       <iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ" title="Vídeo de Teste 1" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #9c27b0;"></div>
+                        <div class="textos-video">
+                            <h3>Dominando as tags DIV e o conceito do Box-Model de uma vez por todas</h3>
+                            <p>Dev Master</p>
+                            <p>103 mil visualizações • há 1 mês</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- CARTÃO 3 -->
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+<iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="Vídeo de Teste 3" allowfullscreen></iframe>                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Como usar Pseudo-elementos CSS para criar efeitos incríveis em tabelas e listas</h3>
+                            <p>Código Criativo</p>
+                            <p>4 mil visualizações • há 5 horas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTÃO 4 -->
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+<iframe src="https://www.youtube.com/embed/eRsGyueVLvQ" title="Vídeo de Teste 4" allowfullscreen></iframe>                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #4caf50;"></div>
+                        <div class="textos-video">
+                            <h3>Dicas infalíveis de interface e usabilidade para melhorar seus sites</h3>
+                            <p>Design Lab</p>
+                            <p>42 mil visualizações • há 1 ano</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>
