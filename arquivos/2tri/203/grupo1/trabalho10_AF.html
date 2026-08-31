@@ -1,1 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuTube Premium</title>
+    
+    <style>
+        /* =======================================================
+           1. RESET E BOX MODEL
+           ======================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            /* O SEGREDO DAS DIVS: 'box-sizing: border-box' garante que o 
+               espaçamento interno (padding) e a borda não aumentem o tamanho 
+               total das nossas Divs. Sem isso, o layout quebra! */
+            box-sizing: border-box; 
+        }
 
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            color:#e5e5e5;
+            background-color: #0f0f0f; 
+            overflow-x: hidden;
+        }
+
+
+        /* =======================================================
+           2. FLEXBOX NO CABEÇALHO
+           O #cabecalho-principal é um contêiner Flex. 
+           ======================================================= */
+        #cabecalho-principal {
+            /* display: flex; transforma este elemento em uma linha flexível,
+               permitindo que as Divs dentro dele fiquem lado a lado. */
+            display: flex;
+            /* space-between joga a 1ª Div para a esquerda, a 2ª para o meio 
+               e a 3ª para a direita, distribuindo o espaço. */
+            justify-content: space-between; 
+            align-items: center;            
+            background-color: #050505;
+            padding: 12px 24px; /* Espaço interno para a Div não esmagar o conteúdo */
+            position: fixed;                
+            top: 0; left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 100;                   
+        }
+
+        /* Esta é uma Div interna do cabeçalho. Ela também usa Flexbox
+           para alinhar o ícone e o texto lado a lado! */
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* gap define a distância exata entre os itens dentro da Div */
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .logo-box span { color: #ff0000; }
+
+        /* A Div da busca: controlamos a largura dela para ocupar 40% da tela */
+        .busca-box {
+            display: flex;
+            width: 40%;
+        }
+        .busca-box input {
+            width: 100%;
+            padding: 10px 16px;
+            background-color: #ededed;
+            border: 1px solid #303030;
+            border-radius: 40px 0 0 40px; 
+            color: rgb(10, 9, 9); outline: none;
+        }
+        .busca-box button {
+            padding: 0 20px;
+            background-color: #222222;
+            border: 1px solid #303030; border-left: none; 
+            border-radius: 0 40px 40px 0; 
+            color: white; cursor: pointer;
+        }
+        .busca-box button:hover { background-color: #272727; }
+
+        /* Uma Div que imita uma foto de perfil apenas arredondando suas bordas */
+        .perfil-mock {
+            text-align: center;
+            color: #fefefe;
+            width: 110px;
+            height: 35px;
+            padding: 8px;
+            background-color: #bc1b1b;
+            border-radius: 10px; 
+            cursor: pointer;
+        }
+
+
+        #layout-container a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #7b0909; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        .perfil-mock a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #644646; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        #barra-lateral a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #efe3e3; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        /* =======================================================
+           3. ESTRUTURA PRINCIPAL (DIVS DE LAYOUT)
+           O #layout-container é a "Super Div" que segura o Menu e os Vídeos.
+           ======================================================= */
+        #layout-container {
+            display: flex; /* Coloca o Menu (esquerda) e Vídeos (direita) lado a lado */
+            margin-top: 60px; /* Empurra essa Div para baixo para não sumir sob o cabeçalho */
+        }
+
+        #barra-lateral {
+            width: 240px; /* Largura fixa para a Div do menu */
+            height: calc(100vh - 60px); 
+            background-color: #ca0446;
+            padding: 12px;
+            position: fixed;            
+            left: 0; top: 60px;
+            color:#ece6e6
+        }
+        #barra-lateral ul { 
+            list-style-type: none; 
+        }
+
+        #barra-lateral li {
+            padding: 12px 20px; border-radius: 10px; margin-bottom: 4px;
+            cursor: pointer; font-size: 14px; transition: background 0.2s; 
+        }
+        #barra-lateral li:hover, #barra-lateral li.ativo {
+            background-color: #d83e72; font-weight: bold;
+
+        }
+
+        /* =======================================================
+           4. CSS GRID (A DIV MAIS PODEROSA)
+           ======================================================= */
+        #conteudo-videos {
+            flex-grow: 1; /* Faz essa Div crescer e ocupar todo o resto da tela */
+            margin-left: 240px; /* Empurra 240px para a direita para não ficar sob o menu */
+            padding: 24px;
+        }
+
+        /* A Div .grade-videos não usa Flexbox, usa GRID! 
+           Isso cria uma "tabela" invisível na tela. */
+        .grade-videos {
+            display: grid;
+            /* auto-fill e minmax criam colunas responsivas: cada vídeo terá 
+               no mínimo 300px. Se a tela crescer, ele cria mais colunas sozinho! */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 40px 16px; /* Espaçamento vertical e horizontal entre os vídeos */
+        }
+
+        /* =======================================================
+           5. DIVS DOS VÍDEOS (BOX MODEL APLICADO)
+           ======================================================= */
+        .cartao-video {
+            display: flex;
+            flex-direction: column; /* Coloca o vídeo em cima e o texto embaixo */
+            cursor: pointer;
+        }
+
+        /* Div que "encapsula" o vídeo para podermos arredondar as bordas */
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px; 
+            overflow: hidden; /* Corta as pontas do vídeo interno para respeitar o border-radius */
+            margin-bottom: 12px; 
+            background-color: #000;
+            transition: transform 0.3s;
+        }
+        .cartao-video:hover .video-wrapper {
+            transform: scale(1.02); /* Efeito de zoom na Div ao passar o mouse */
+        }
+        .cartao-video iframe { width: 100%; display: block; border: none; }
+
+        /* Div que organiza a foto redonda e os textos alinhados ao lado dela */
+        .info-video {
+            display: flex;
+            gap: 12px;
+        }
+
+        .canal-avatar {
+            width: 36px; height: 36px; background-color: #ff5722;
+            border-radius: 50%;
+            flex-shrink: 0; /* Impede que essa Div amasse se o título for muito longo */
+        }
+
+        .textos-video h3 {
+            font-size: 16px; font-weight: 500; line-height: 22px;
+            margin-bottom: 6px; color: #f1f1f1;
+            color: #efefef;
+        }
+        .textos-video p { font-size: 14px; color: #a8a8a8; }
+    </style>
+</head>
+<body>
+
+    <header id="cabecalho-principal">
+        <!-- DIV 1: Contêiner Flex para agrupar e alinhar a logo. -->
+        <div class="logo-box">
+            <span>🔴</span> MeuTube - Minhas Músicas
+        </div>
+        
+        <!-- DIV 2: Contêiner para limitar o tamanho da barra de busca em 40%. -->
+        <div class="busca-box">
+            <input type="text" placeholder="Pesquisar">
+            <button>🔍</button>
+        </div>
+
+        <!-- DIV 3: Usada puramente para criar um elemento visual (o círculo de perfil). -->
+        <div class="perfil-mock">
+            <a href="https://marcelo-padilha.github.io/trabalhos_HTML-CSS/index.html">+TRABALHOS</a>
+        </div>
+    </header>
+
+    <!-- SUPER DIV: Envolve o Menu e a área de Vídeos, usando Flexbox para colocá-los lado a lado. -->
+    <div id="layout-container">
+
+        <nav id="barra-lateral">
+            <ul>
+                <li class="ativo">🏠 Início</li>
+                <li><a href="https://www.youtube.com/shorts" >📱 Shorts </a></li>
+                <li><a href="https://www.youtube.com"> 🔥 Em Alta </a> </li>
+                <li><a href="https://www.youtube.com/feed/subscriptions"> 📁 Inscrições </a> </li>
+                <hr style="border: 0; border-top: 1px solid #303030; margin: 10px 0;">
+                <li><a href="https://www.youtube.com/feed/playlists">📚 Playlists </a> </li>
+                <li><a href="https://www.youtube.com/feed/history">⏳ Histórico </a></li>
+                <li><a href="https://www.youtube.com">🎬 Seus Vídeos</a></li>
+            </ul>
+        </nav>
+
+        <main id="conteudo-videos">
+            
+            <!-- DIV GRID: Esta Div ativa o CSS Grid, transformando seus "filhos" em itens de uma grade responsiva. -->
+            <div class="grade-videos">
+
+                <!-- DIV DO CARTÃO: Cada vídeo e seus textos são agrupados dentro desta Div para formarem um bloco único. -->
+                <div class="cartao-video">
+                    
+                    <!-- DIV DO VÍDEO: Uma Div separada só para conter o iframe, permitindo aplicar bordas arredondadas e sombras. -->
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/aD9eAV1ZAcw?si=Klwwpz_CFSIGTLc5" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    
+                    </div>
+                    
+                    <!-- DIV DE INFORMAÇÕES: Agrupa a foto de perfil e os textos usando Flexbox para alinhá-los em linha. -->
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <!-- DIV DE TEXTOS: Agrupa Título e Parágrafos para mantê-los empilhados perfeitamente à direita da foto. -->
+                        <div class="textos-video">
+                            <h3>Luvcat - Spider {lyric video}</h3>
+                            <p>Luvcat</p>
+                            <p>Talvez uma das melhores músicas da Sophie e ninguém fala sobre ela nunca.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/-WHsbdcqgrY?si=XHZHkCg3_SzCA4dS" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+
+                </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Jhariah - TOOTH PACT (Official Audio)</h3>
+                            <p>Jhariah</p>
+                            <p>Eu acho que todo mundo deveria escutar Jhariah, o cara é genuinamente brilhante.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/a0JHHSYs9io?si=AA6gR_eAkkjAvuj3" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Noah Kahan - Staying Still (Official Lyric Video)</h3>
+                            <p>Noah Kahan</p>
+                            <p>Eu gosto muito das últimas estrofes da música.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/5pZI1AuSHng?si=9cVNX11lmV5xuRZS" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Noah Kahan - Lighthouse (Official Lyric Video)</h3>
+                            <p>Noah Kahan</p>
+                            <p>"Você tem um rosto que pertence à um cartaz de procurado" é uma das letras mais insanas que eu já ouvi na minha vida.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/XcOtw783gOI?si=JfVRu988fu2Lmya0" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Luvcat - Alchemy - Live in 4k @ Manchester Academy 3, February 21st 2025</h3>
+                            <p>Live in Concert</p>
+                            <p>Música que a cantora hypou pra caraca e depois não lançou por "razões legais". Era minha música favorita. :(</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/__9X5wRuio0?si=YfdJ7Nv6D5_RrU-c" 
+                        title="YouTube video player" frameborder="0" allow="accelerometer; 
+                        autoplay; 
+                        clipboard-write; 
+                        encrypted-media; 
+                        gyroscope; 
+                        picture-in-picture; 
+                        web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe> 
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Charli xcx - I'm Afraid (Official Audio)</h3>
+                            <p>Charli xcx</p>
+                            <p>Única música do álbum novo que eu ouvi, foi como ser atingida por um meteoro. Me senti um velociraptor.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/DUFwXC9dkCg?si=PFrkKU6MILqVtKR_" 
+                        title="YouTube video player" frameborder="0" allow="accelerometer; 
+                        autoplay; 
+                        clipboard-write; 
+                        encrypted-media; 
+                        gyroscope; 
+                        picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Gigi Perez - Summertime Sadness (Lana del Rey Cover) | Rose Bowl - Pasadena, CA - August 15, 2026 | </h3>
+                            <p>Scott From The Crowd</p>
+                            <p>Mil perdões pra Srta. del Rey mas a Gigi Perez meio que melhorou a música. Tem uma versão desse cover no Like A Version também, provavelmente com qualidade melhor.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/RZWl7CMRmMc?si=c-WHP8YKxG9pJi1k" 
+                        title="YouTube video player" frameborder="0" allow="accelerometer; 
+                        autoplay; 
+                        clipboard-write; 
+                        encrypted-media; 
+                        gyroscope; 
+                        picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Os Alquimistas Estão Chegando Os Alquimistas</h3>
+                            <p>Jorge Ben Jor</p>
+                            <p>Eu gosto muitíssimo desse albúm.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/GcXlN7meclE?si=hq8RIn1ePZzINNFk" 
+                        title="YouTube video player" frameborder="0" allow="accelerometer; 
+                        autoplay; 
+                        clipboard-write; 
+                        encrypted-media; 
+                        gyroscope; 
+                        picture-in-picture; 
+                        web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #066091;"></div>
+                        <div class="textos-video">
+                            <h3>Chappell Roan - California (Official Lyric Video)</h3>
+                            <p>Chappell Roan</p>
+                            <p>Ela deveria ser processada por terror psicológico por isso. E pela cirança do Flamengo também, eu acho.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
