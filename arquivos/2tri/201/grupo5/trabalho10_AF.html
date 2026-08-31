@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +21,7 @@
 
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #d1d1d1; 
+            background-color: #000000; 
             overflow-x: hidden;
         }
 
@@ -37,7 +38,7 @@
                e a 3ª para a direita, distribuindo o espaço. */
             justify-content: space-between; 
             align-items: center;            
-            background-color: #e5e5e5;
+            background-color: #fcf8f8;
             padding: 12px 24px; /* Espaço interno para a Div não esmagar o conteúdo */
             position: fixed;                
             top: 0; left: 0;
@@ -56,7 +57,7 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .logo-box span { color: #ff0000; }
+        .logo-box span { color: #fc0000; }
 
         /* A Div da busca: controlamos a largura dela para ocupar 40% da tela */
         .busca-box {
@@ -95,7 +96,7 @@
 
         #layout-container a {
             text-decoration: none; /* Remove o sublinhado */
-             color: #7b0909; ;         /* Muda a cor azul para a cor que preferir */
+             color: #fffcfc; ;         /* Muda a cor azul para a cor que preferir */
         }
 
         .perfil-mock a {
@@ -115,7 +116,7 @@
         #barra-lateral {
             width: 240px; /* Largura fixa para a Div do menu */
             height: calc(100vh - 60px); 
-            background-color: #fb7e7e;
+            background-color: #000000;
             padding: 12px;
             position: fixed;            
             left: 0; top: 60px;
@@ -126,7 +127,7 @@
             cursor: pointer; font-size: 14px; transition: background 0.2s; 
         }
         #barra-lateral li:hover, #barra-lateral li.ativo {
-            background-color: #ffc8c8; font-weight: bold;
+            background-color: #ff0909; font-weight: bold;
         }
 
         /* =======================================================
@@ -186,9 +187,9 @@
         .textos-video h3 {
             font-size: 16px; font-weight: 500; line-height: 22px;
             margin-bottom: 6px; color: #f1f1f1;
-            color: #000;
+            color: #f1f1f1;
         }
-        .textos-video p { font-size: 14px; color: #2a2a2a; }
+        .textos-video p { font-size: 14px; color: #f1f1f1; }
     </style>
 </head>
 <body>
@@ -237,15 +238,22 @@
                     
                     <!-- DIV DO VÍDEO: Uma Div separada só para conter o iframe, permitindo aplicar bordas arredondadas e sombras. -->
                     <div class="video-wrapper">
-                
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ltRkOj4ioy4?si=vZvj6GmBNIBxxB7t" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/Zznit8LDZMg?si=gMXl4cpEfiGFRfkc" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
                     
                     </div>
                     
                     <!-- DIV DE INFORMAÇÕES: Agrupa a foto de perfil e os textos usando Flexbox para alinhá-los em linha. -->
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <!-- DIV DE TEXTOS: Agrupa Título e Parágrafos para mantê-los empilhados perfeitamente à direita da foto. -->
                         <div class="textos-video">
                             <h3>Panda - Má Influência</h3>
@@ -257,15 +265,10 @@
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-              
-               
-                
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/O_EaVQJ8fRY?si=t2auq8MnzvGpoRm7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                
-                
-                </div>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/iYjz1Ap1VvU?si=9vL-i3eJtzz31lBH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
                             <h3>Grupo Menos É Mais, NATTAN - Pela Última Vez</h3>
                             <p>Grupo Menos é Mais e Nattan</p>
@@ -276,48 +279,91 @@
                 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        
- <iframe width="560" height="315" src="https://www.youtube.com/embed/_cCUBE1Hf64?si=rfDvTMcMCrF-taUZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/_k2ty4A5x1w?si=ieP8QWKGxJrmHU-O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
-                            <h3>Título</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
+                            <h3>Henrique e Juliano - Realidade ou Fantasia</h3>
+                            <p>Mason Section</p>
+                            <p>Minha musica favorita</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        
- <iframe width="560" height="315" src="https://www.youtube.com/embed/dFdmflql1Gg?si=WLb2yMLrGh7Q0Y2v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EhlhRIJygPM?si=UbmWBnio0MPBrq3i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
-                            <h3>study vlog</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
+                            <h3>Jorge e Mateus - Os anjos cantam</h3>
+                            <p>Jorge & Mateus Oficial</p>
+                            <p>Porque eu gosto muito das musicas deles</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/HR4ZxjGQGYY?si=DevtPI9JyGwTKQU5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                     
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="textos-video">
+                            <h3>Jorge e Mateus - Duas Metades</h3>
+                            <p>Jorge & Mateus Oficial</p>
+                            <p>Umas das musicas favoritas</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zeJ3KpmgIwA?si=e4TT1ViCEr0T6Xw2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="textos-video">
+                            <h3>Flamengo x River Plate</h3>
+                            <p>Espn Brasil</p>
+                            <p>Um jogo historico do meu time</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/aq-DH4iwviE?si=CmRnbrovMdZSYwUV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="textos-video">
+                            <h3>Matuê - 333</h3>
+                            <p>30PRAUM</p>
+                            <p>Gosto do Estilo Musical do Cantor</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/jZciTXk5b8M?si=HyIVJ_pyvLl7l4rt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 
                         </iframe> 
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
-                            <h3>Título</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
+                            <h3>Neymar Jr</h3>
+                            <p>Neymar Jr</p>
+                            <p>Gosto do Jogador e Acompanhar os Vlog dele</p>
                         </div>
                     </div>
                 </div>
@@ -325,70 +371,50 @@
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/mZ0Snvc1rHE?si=4q_WWW99r7tAI-x7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 
                         </iframe> 
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
-                            <h3>Título</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
+                            <h3>Mc Cabelinho - Ringue da Vida</h3>
+                            <p>Mc Cabelinho</p>
+                            <p>Meu Cantor Favorito</p>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe>
-
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/daDOZK_MObs?si=bmrfj4wRKiPYczOm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                         </iframe> 
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
-                            <h3>Título</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
+                            <h3>Mc Cabelinho - Quem me dera</h3>
+                            <p>Mc Cabelinho</p>
+                            <p>Meu Cantor Favorito</p>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe>
-
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/I7qbgUllzsA?si=RbB9ynhj-rcMgtbD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                         </iframe> 
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
                         <div class="textos-video">
-                            <h3>Título</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
+                            <h3>Julia Souza - 1 ano da Tiana</h3>
+                            <p>Julia Souza</p>
+                            <p>Influencer que eu mais acompanho</p>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="cartao-video">
-                    <div class="video-wrapper">
-                        <iframe>
-
-                        </iframe> 
-                    </div>
-                    <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
-                        <div class="textos-video">
-                            <h3>Título</h3>
-                            <p>Nome do vanal</p>
-                            <p>Gênero Musical</p>
-                        </div>
-                    </div>
-                </div>
+            
 
             </div>
         </main>
