@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuTube Premium</title>
+    
+    <style>
+        /* =======================================================
+           1. RESET E BOX MODEL
+           ======================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            /* O SEGREDO DAS DIVS: 'box-sizing: border-box' garante que o 
+               espaçamento interno (padding) e a borda não aumentem o tamanho 
+               total das nossas Divs. Sem isso, o layout quebra! */
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #fdcadd; 
+            overflow-x: hidden;
+        }
+
+
+        /* =======================================================
+           2. FLEXBOX NO CABEÇALHO
+           O #cabecalho-principal é um contêiner Flex. 
+           ======================================================= */
+        #cabecalho-principal {
+            /* display: flex; transforma este elemento em uma linha flexível,
+               permitindo que as Divs dentro dele fiquem lado a lado. */
+            display: flex;
+            /* space-between joga a 1ª Div para a esquerda, a 2ª para o meio 
+               e a 3ª para a direita, distribuindo o espaço. */
+            justify-content: space-between; 
+            align-items: center;            
+            background-color: #ff869e;
+            padding: 12px 24px; /* Espaço interno para a Div não esmagar o conteúdo */
+            position: fixed;                
+            top: 0; left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 100;                   
+        }
+
+        /* Esta é uma Div interna do cabeçalho. Ela também usa Flexbox
+           para alinhar o ícone e o texto lado a lado! */
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* gap define a distância exata entre os itens dentro da Div */
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .logo-box span { color: #f0286b; }
+
+        /* A Div da busca: controlamos a largura dela para ocupar 40% da tela */
+        .busca-box {
+            display: flex;
+            width: 40%;
+        }
+        .busca-box input {
+            width: 100%;
+            padding: 10px 16px;
+            background-color: #f9f9f9;
+            border: 1px solid #f6cfdd;
+            border-radius: 40px 0 0 40px; 
+            color: rgb(219, 60, 121); outline: none;
+        }
+        .busca-box button {
+            padding: 0 20px;
+            background-color: #fad5e5;
+            border: 1px solid #f9f9f9; border-left: none; 
+            border-radius: 0 40px 40px 0; 
+            color: white; cursor: pointer;
+        }
+        .busca-box button:hover { background-color: #272727; }
+
+        /* Uma Div que imita uma foto de perfil apenas arredondando suas bordas */
+        .perfil-mock {
+            text-align: center;
+            color: #eca6a6;
+            width: 110px;
+            height: 35px;
+            padding: 8px;
+            background-color: #ff0149;
+            border-radius: 10px; 
+            cursor: pointer;
+        }
+
+
+        #layout-container a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #f03c78; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        .perfil-mock a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #ffffff; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        /* =======================================================
+           3. ESTRUTURA PRINCIPAL (DIVS DE LAYOUT)
+           O #layout-container é a "Super Div" que segura o Menu e os Vídeos.
+           ======================================================= */
+        #layout-container {
+            display: flex; /* Coloca o Menu (esquerda) e Vídeos (direita) lado a lado */
+            margin-top: 60px; /* Empurra essa Div para baixo para não sumir sob o cabeçalho */
+        }
+
+        #barra-lateral {
+            width: 240px; /* Largura fixa para a Div do menu */
+            height: calc(100vh - 60px); 
+            background-color: #ffe7ef;
+            padding: 12px;
+            position: fixed;            
+            left: 0; top: 60px;
+        }
+        #barra-lateral ul { list-style-type: none; }
+        #barra-lateral li {
+            padding: 12px 20px; border-radius: 10px; margin-bottom: 4px;
+            cursor: pointer; font-size: 14px; transition: background 0.2s; 
+        }
+        #barra-lateral li:hover, #barra-lateral li.ativo {
+            background-color: #febbd8; font-weight: bold;
+        }
+
+        /* =======================================================
+           4. CSS GRID (A DIV MAIS PODEROSA)
+           ======================================================= */
+        #conteudo-videos {
+            flex-grow: 1; /* Faz essa Div crescer e ocupar todo o resto da tela */
+            margin-left: 240px; /* Empurra 240px para a direita para não ficar sob o menu */
+            padding: 24px;
+        }
+
+        /* A Div .grade-videos não usa Flexbox, usa GRID! 
+           Isso cria uma "tabela" invisível na tela. */
+        .grade-videos {
+            display: grid;
+            /* auto-fill e minmax criam colunas responsivas: cada vídeo terá 
+               no mínimo 300px. Se a tela crescer, ele cria mais colunas sozinho! */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 40px 16px; /* Espaçamento vertical e horizontal entre os vídeos */
+        }
+
+        /* =======================================================
+           5. DIVS DOS VÍDEOS (BOX MODEL APLICADO)
+           ======================================================= */
+        .cartao-video {
+            display: flex;
+            flex-direction: column; /* Coloca o vídeo em cima e o texto embaixo */
+            cursor: pointer;
+        }
+
+        /* Div que "encapsula" o vídeo para podermos arredondar as bordas */
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px; 
+            overflow: hidden; /* Corta as pontas do vídeo interno para respeitar o border-radius */
+            margin-bottom: 12px; 
+            background-color: #f9568fa3;
+            transition: transform 0.3s;
+        }
+        .cartao-video:hover .video-wrapper {
+            transform: scale(1.02); /* Efeito de zoom na Div ao passar o mouse */
+        }
+        .cartao-video iframe { width: 100%; display: block; border: none; }
+
+        /* Div que organiza a foto redonda e os textos alinhados ao lado dela */
+        .info-video {
+            display: flex;
+            gap: 12px;
+        }
+
+        .canal-avatar {
+            width: 36px; height: 36px; background-color: #dfead6;
+            border-radius: 50%;
+            flex-shrink: 0; /* Impede que essa Div amasse se o título for muito longo */
+        }
+
+        .textos-video h3 {
+            font-size: 16px; font-weight: 500; line-height: 22px;
+            margin-bottom: 6px; color: #64ea04;
+            color: #ff0066b7;
+        }
+        .textos-video p { font-size: 14px; color: #640d25; }
+    </style>
+</head>
+<body>
+
+    <header id="cabecalho-principal">
+        <!-- DIV 1: Contêiner Flex para agrupar e alinhar a logo. -->
+        <div class="logo-box">
+            <span>🦈​</span> MeuTube - Meu Mundo
+        </div>
+        
+        <!-- DIV 2: Contêiner para limitar o tamanho da barra de busca em 40%. -->
+        <div class="busca-box">
+            <input type="text" placeholder="Pesquisar">
+            <button>🔍</button>
+        </div>
+
+        <!-- DIV 3: Usada puramente para criar um elemento visual (o círculo de perfil). -->
+        <div class="perfil-mock">
+            <a href="https://marcelo-padilha.github.io/trabalhos_HTML-CSS/index.html">+TRABALHOS</a>
+        </div>
+    </header>
+
+    <!-- SUPER DIV: Envolve o Menu e a área de Vídeos, usando Flexbox para colocá-los lado a lado. -->
+    <div id="layout-container">
+
+        <nav id="barra-lateral">
+            <ul>
+                <li class="ativo">🌏​ Início</li>
+                <li><a href="https://www.youtube.com/shorts" >📹​ Shorts </a></li>
+                <li><a href="https://www.youtube.com"> 🏅​ Em Alta </a> </li>
+                <li><a href="https://www.youtube.com/feed/subscriptions"> 📁 Inscrições </a> </li>
+                <hr style="border: 0; border-top: 1px solid #303030; margin: 10px 0;">
+                <li><a href="https://www.youtube.com/feed/playlists">🎧 Playlists </a> </li>
+                <li><a href="https://www.youtube.com/feed/history">⏳ Histórico </a></li>
+                <li><a href="https://www.youtube.com">🎬 Seus Vídeos</a></li>
+            </ul>
+        </nav>
+
+        <main id="conteudo-videos">
+            
+            <!-- DIV GRID: Esta Div ativa o CSS Grid, transformando seus "filhos" em itens de uma grade responsiva. -->
+            <div class="grade-videos">
+
+                <!-- DIV DO CARTÃO: Cada vídeo e seus textos são agrupados dentro desta Div para formarem um bloco único. -->
+                <div class="cartao-video">
+                    
+                    <!-- DIV DO VÍDEO: Uma Div separada só para conter o iframe, permitindo aplicar bordas arredondadas e sombras. -->
+                    <div class="video-wrapper">
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/rpefHCBVuHw?si=OdXohXQVTlNXCeZc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    
+                    </div>
+                    
+                    <!-- DIV DE INFORMAÇÕES: Agrupa a foto de perfil e os textos usando Flexbox para alinhá-los em linha. -->
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <!-- DIV DE TEXTOS: Agrupa Título e Parágrafos para mantê-los empilhados perfeitamente à direita da foto. -->
+                        <div class="textos-video">
+                            <h3>Os mistérios dos tubarões-baleia nas águas da Ilha da Máfia| África: Maravilhas do Mundo Marinho 103</h3>
+                            <p>NatureTime Brasil</p>
+                            <p>Escolhi este vídeo pois gosto de Biologia marinha, e específicamente Tubarões Baleia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3DgSeh82zoc?si=YFmLWbj04mXXM-3x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #ffcdee;"></div>
+                        <div class="textos-video">
+                            <h3>Oceano Índico — O Reino Submerso dos Maiores Predadores do Planeta | Documentário Animal</h3>
+                            <p>Wild Nature - Português</p>
+                            <p>Tubarões</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/SDXB02KzQ6U?si=4IUM1Z1AeZGcWNJV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>O que Significa o Pentagrama, a Triluna e outros Símbolos Mágicos?</h3>
+                            <p>Pri Ferraz - Diário da Bruxa</p>
+                            <p>Sobre minhas práticas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/HX2RDoWcgZ4?si=nuV5_ljvUhaL9xIU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Grandes Mulheres da Magia e Bruxaria</h3>
+                            <p>Pri Ferraz - Diário da Bruxa</p>
+                            <p>Parte importante de se aprender</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nh-LsDFzKCI?si=uKJtkn__0W8a_jw7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Introdução ao Helenismo: O que é, ética e valores do politeísmo helênico!</h3>
+                            <p>Iara Bonini | A Bruxa Literária</p>
+                            <p>Gosta da origem, das práticas e etc</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/kiiSNEqqwYA?si=g-sLn3qBCdSuQIcs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Qual é a Diferença entre Bruxaria, Wicca, Magia e Paganismo?</h3>
+                            <p>Pri Ferraz - Diário da Bruxa</p>
+                            <p>Acho importante, pois muitos confudem e dizem coisas fora do real contexto</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_JOSu1EXk00?si=L7WVLnbuBKsp5sVq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Cheesecake de Frutas Vermelhas - Maethe Chef</h3>
+                            <p>Maethe</p>
+                            <p>Meu canal favorito</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/WFBEyTTqXHU?si=ByMYC9DWdiWWXhRY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>O SERIAL KILLER MAIS JOVEM DO MUNDO | Casos Reais</h3>
+                            <p>Cafezinho Investigativo</p>
+                            <p>Tenho vício em casos criminais</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/o0Hg97NN9c8?si=x-xjyT8mZz2rkew5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Como expandir seu repertório</h3>
+                            <p>Capituts</p>
+                            <p>Um dos meus canais favoritos para passar tempo </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
