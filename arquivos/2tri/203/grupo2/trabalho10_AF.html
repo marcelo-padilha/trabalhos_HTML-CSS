@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NossoTube Premium</title>
+    
+    <style>
+        /* =======================================================
+           1. RESET E BOX MODEL
+           ======================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            /* O SEGREDO DAS DIVS: 'box-sizing: border-box' garante que o 
+               espaçamento interno (padding) e a borda não aumentem o tamanho 
+               total das nossas Divs. Sem isso, o layout quebra! */
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #272222; 
+            overflow-x: hidden;
+            color: #f1f1f1;
+        }
+
+
+        /* =======================================================
+           2. FLEXBOX NO CABEÇALHO
+           O #cabecalho-principal é um contêiner Flex. 
+           ======================================================= */
+        #cabecalho-principal {
+            /* display: flex; transforma este elemento em uma linha flexível,
+               permitindo que as Divs dentro dele fiquem lado a lado. */
+            display: flex;
+            /* space-between joga a 1ª Div para a esquerda, a 2ª para o meio 
+               e a 3ª para a direita, distribuindo o espaço. */
+            justify-content: space-between; 
+            align-items: center;            
+            background-color: #1b1919;
+            padding: 12px 24px; /* Espaço interno para a Div não esmagar o conteúdo */
+            position: fixed;                
+            top: 0; left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 100;                   
+        }
+
+        /* Esta é uma Div interna do cabeçalho. Ela também usa Flexbox
+           para alinhar o ícone e o texto lado a lado! */
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* gap define a distância exata entre os itens dentro da Div */
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .logo-box span { color: #32531f; }
+
+        /* A Div da busca: controlamos a largura dela para ocupar 40% da tela */
+        .busca-box {
+            display: flex;
+            width: 40%;
+        }
+        .busca-box input {
+            width: 100%;
+            padding: 10px 16px;
+            background-color: #000000;
+            border: 1px solid #000000;
+            border-radius: 40px 0 0 40px; 
+            color: rgb(255, 255, 255); outline: none;
+        }
+        .busca-box button {
+            padding: 0 20px;
+            background-color: #000000;
+            border: 1px solid #050505; border-left: none; 
+            border-radius: 0 40px 40px 0; 
+            color: white; cursor: pointer;
+        }
+        .busca-box button:hover { background-color: #272222; }
+
+        /* Uma Div que imita uma foto de perfil apenas arredondando suas bordas */
+        .perfil-mock {
+            text-align: center;
+            color: #fefefe;
+            width: 110px;
+            height: 35px;
+            padding: 8px;
+            background-color: #461d1d;
+            border-radius: 10px; 
+            cursor: pointer;
+        }
+
+
+        #layout-container a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #fafafa; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        .perfil-mock a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #fff4f4; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        /* =======================================================
+           3. ESTRUTURA PRINCIPAL (DIVS DE LAYOUT)
+           O #layout-container é a "Super Div" que segura o Menu e os Vídeos.
+           ======================================================= */
+        #layout-container {
+            display: flex; /* Coloca o Menu (esquerda) e Vídeos (direita) lado a lado */
+            margin-top: 60px; /* Empurra essa Div para baixo para não sumir sob o cabeçalho */
+        }
+
+        #barra-lateral {
+            width: 240px; /* Largura fixa para a Div do menu */
+            height: calc(100vh - 60px); 
+            background-color: ;
+            padding: 12px;
+            position: fixed;            
+            left: 0; top: 60px;
+        }
+        #barra-lateral ul { list-style-type: none; }
+        #barra-lateral li {
+            padding: 12px 20px; border-radius: 10px; margin-bottom: 4px;
+            cursor: pointer; font-size: 14px; transition: background 0.2s; 
+        }
+        #barra-lateral li:hover, #barra-lateral li.ativo {
+            background-color: #423f3f; font-weight: bold;
+        }
+
+        /* =======================================================
+           4. CSS GRID (A DIV MAIS PODEROSA)
+           ======================================================= */
+        #conteudo-videos {
+            flex-grow: 1; /* Faz essa Div crescer e ocupar todo o resto da tela */
+            margin-left: 240px; /* Empurra 240px para a direita para não ficar sob o menu */
+            padding: 24px;
+        }
+
+        /* A Div .grade-videos não usa Flexbox, usa GRID! 
+           Isso cria uma "tabela" invisível na tela. */
+        .grade-videos {
+            display: grid;
+            /* auto-fill e minmax criam colunas responsivas: cada vídeo terá 
+               no mínimo 300px. Se a tela crescer, ele cria mais colunas sozinho! */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 40px 16px; /* Espaçamento vertical e horizontal entre os vídeos */
+        }
+
+        /* =======================================================
+           5. DIVS DOS VÍDEOS (BOX MODEL APLICADO)
+           ======================================================= */
+        .cartao-video {
+            display: flex;
+            flex-direction: column; /* Coloca o vídeo em cima e o texto embaixo */
+            cursor: pointer;
+        }
+
+        /* Div que "encapsula" o vídeo para podermos arredondar as bordas */
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px; 
+            overflow: hidden; /* Corta as pontas do vídeo interno para respeitar o border-radius */
+            margin-bottom: 12px; 
+            background-color: #000;
+            transition: transform 0.3s;
+        }
+        .cartao-video:hover .video-wrapper {
+            transform: scale(1.02); /* Efeito de zoom na Div ao passar o mouse */
+        }
+        .cartao-video iframe { width: 100%; display: block; border: none; }
+
+        /* Div que organiza a foto redonda e os textos alinhados ao lado dela */
+        .info-video {
+            display: flex;
+            gap: 12px;
+        }
+
+        .canal-avatar {
+            width: 36px; height: 36px; background-color: #fffefe;
+            border-radius: 50%;
+            flex-shrink: 0; /* Impede que essa Div amasse se o título for muito longo */
+        }
+
+        .textos-video h3 {
+            font-size: 16px; font-weight: 500; line-height: 22px;
+            margin-bottom: 6px; color: #f1f1f1;
+            color: #fff4f4;
+        }
+        .textos-video p { font-size: 14px; color: #fffefe; }
+    </style>
+</head>
+<body>
+
+    <header id="cabecalho-principal">
+        <!-- DIV 1: Contêiner Flex para agrupar e alinhar a logo. -->
+        <div class="logo-box">
+            <span>▶️</span> NossoTube - Seus vídeos e músicas em qualquer lugar e a toda hora
+        </div>
+        
+        <!-- DIV 2: Contêiner para limitar o tamanho da barra de busca em 40%. -->
+        <div class="busca-box">
+            <input type="text" placeholder="Pesquisar">
+            <button>🔍</button>
+        </div>
+
+        <!-- DIV 3: Usada puramente para criar um elemento visual (o círculo de perfil). -->
+        <div class="perfil-mock">
+            <a href="https://marcelo-padilha.github.io/trabalhos_HTML-CSS/index.html">+TRABALHOS</a>
+        </div>
+    </header>
+
+    <!-- SUPER DIV: Envolve o Menu e a área de Vídeos, usando Flexbox para colocá-los lado a lado. -->
+    <div id="layout-container">
+
+        <nav id="barra-lateral">
+            <ul>
+                <li class="ativo">🏠 Início</li>
+                <li><a href="https://www.youtube.com/shorts" >📱 Shorts </a></li>
+                <li><a href="https://www.youtube.com"> 🔥 Em Alta </a> </li>
+                <li><a href="https://www.youtube.com/feed/subscriptions"> 📁 Inscrições </a> </li>
+                <hr style="border: 0; border-top: 1px solid #303030; margin: 10px 0;">
+                <li><a href="https://www.youtube.com/feed/playlists">📚 Playlists </a> </li>
+                <li><a href="https://www.youtube.com/feed/history">⏳ Histórico </a></li>
+                <li><a href="https://www.youtube.com">🎬 Seus Vídeos</a></li>
+            </ul>
+        </nav>
+
+        <main id="conteudo-videos">
+            
+            <!-- DIV GRID: Esta Div ativa o CSS Grid, transformando seus "filhos" em itens de uma grade responsiva. -->
+            <div class="grade-videos">
+
+                <!-- DIV DO CARTÃO: Cada vídeo e seus textos são agrupados dentro desta Div para formarem um bloco único. -->
+                <div class="cartao-video">
+                    
+                    <!-- DIV DO VÍDEO: Uma Div separada só para conter o iframe, permitindo aplicar bordas arredondadas e sombras. -->
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://youtu.be/Cglm3cRUgd4?si=YE-LZnZiDMAqHKqH" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    
+                    </div>
+                    
+                    <!-- DIV DE INFORMAÇÕES: Agrupa a foto de perfil e os textos usando Flexbox para alinhá-los em linha. -->
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <!-- DIV DE TEXTOS: Agrupa Título e Parágrafos para mantê-los empilhados perfeitamente à direita da foto. -->
+                        <div class="textos-video">
+                            <h3>O DESENHO PERDIDO DA MINHA INFÂNCIA - ReBoot (SaikoToons)</h3>
+                            <p>Saiko joga</p>
+                            <p>Gosto desse pois é engraçado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://youtu.be/4L1wtKIWcgo?si=L4weHHU1H2D3_7jV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>trote do bufos regularis</h3>
+                            <p>Orochinho</p>
+                            <p>Gosto desse vídeo pois sempre me tira risadas</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://youtu.be/HmlszOIhDBY?si=Pb3-o4U0X5PRy4xJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>dimencions episódio: aonde nos estamos ep:01/09 T:01</h3>
+                            <p>《sorvete_de_ chocomenta》</p>
+                            <p>Meu canal de gacha de quando eu tinha 10 anos...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                         <iframe width="560" height="315" src="https://youtu.be/TcBtFtkQFiU?si=gTmv2LmawiJULGPm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Vingadores: Doutor Destino | Trailer Oficial Dublado</h3>
+                            <p>Marvel Brasil e Walt Disney Studios BR</p>
+                            <p>Amo os filmes da marvel, estou ansioso pra esse</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">  <iframe width="560" height="315" src="https://www.youtube.com/watch?v=OOLM72CU84w&list=PLxUY3vo00GqarEdez2q1Pi9d0jsc9o0yr&index=5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>HEXATOMBE - EPSÓDIO 1 "Receptáculo" | Ordem Paranormal</h3>
+                            <p>Ordem Paranormal</p>
+                            <p>Amo RPG e cellbit</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    
+                        <iframe width="560" height="315" src="https://youtu.be/szts-5Zs5_8?si=xcZh-aX1txkcDXkH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Cazuza - Exagerado (Áudio Oficial)</h3>
+                            <p>Cazuza</p>
+                            <p>Amo o cazuza, mas essa música principalmente pq me lembra uma pessoinha aí (Manu Yukino)</p>
+                        </div>
+                    </div>
+                </div>
+                
+            
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://youtu.be/iogQ_97pmSY?si=CmncwOO9V-Hp8ae1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Provei o tal do MONSTER de café</h3>
+                            <p>Davy Jones</p>
+                            <p>Gosto desse vídeo pq ele expriementa um sabor novo de monster</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://youtu.be/lYfBXsuGjVA?si=kFn1fvng2BsUlj51" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>JOGANDO HOLLOW KNIGHT PRA ENTENDER PORQUE ELE FAZ TANTO SUCESSO</h3>
+                            <p>Jazzghost</p>
+                            <p>Gosto de Jazzghost e de Hollow Knight</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe>
+
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Título</h3>
+                            <p>Nome do vanal</p>
+                            <p>Gênero Musical</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe>
+
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Título</h3>
+                            <p>Nome do vanal</p>
+                            <p>Gênero Musical</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe>
+
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Título</h3>
+                            <p>Nome do vanal</p>
+                            <p>Gênero Musical</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+     <iframe width="560" height="315" src="https://youtu.be/_oYSiPBUuC8?si=hm9Vy0GplfUU6K3X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Tenacious D - ...Baby One More Time (from Kung Fu Panda 4)</h3>
+                            <p>Tenacious D</p>
+                            <p>Gosto muito dessa música, principalmente na voz do JACK BLAACK</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe>
+                        <iframe>
+
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Título</h3>
+                            <p>Nome do vanal</p>
+                            <p>Gênero Musical</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe>
+
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Título</h3>
+                            <p>Nome do vanal</p>
+                            <p>Gênero Musical</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe>
+
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #00bcd4;"></div>
+                        <div class="textos-video">
+                            <h3>Título</h3>
+                            <p>Nome do vanal</p>
+                            <p>Gênero Musical</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
