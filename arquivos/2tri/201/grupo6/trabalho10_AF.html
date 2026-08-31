@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #000000; 
+            background-color: #73b3dd; 
             overflow-x: hidden;
         }
 
@@ -37,7 +37,7 @@
                e a 3ª para a direita, distribuindo o espaço. */
             justify-content: space-between; 
             align-items: center;            
-            background-color: #fcf8f8;
+            background-color: #d8ebf2;
             padding: 12px 24px; /* Espaço interno para a Div não esmagar o conteúdo */
             position: fixed;                
             top: 0; left: 0;
@@ -56,7 +56,7 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .logo-box span { color: #fc0000; }
+        .logo-box span { color: #ff0000; }
 
         /* A Div da busca: controlamos a largura dela para ocupar 40% da tela */
         .busca-box {
@@ -66,28 +66,28 @@
         .busca-box input {
             width: 100%;
             padding: 10px 16px;
-            background-color: #ededed;
-            border: 1px solid #303030;
+            background-color: #f1f1f1;
+            border: 1px solid #006994;
             border-radius: 40px 0 0 40px; 
             color: rgb(10, 9, 9); outline: none;
         }
         .busca-box button {
             padding: 0 20px;
-            background-color: #222222;
-            border: 1px solid #303030; border-left: none; 
+            background-color: #f1f1f1;
+            border: 1px solid #d8ebf2; border-left: none; 
             border-radius: 0 40px 40px 0; 
             color: white; cursor: pointer;
         }
-        .busca-box button:hover { background-color: #272727; }
+        .busca-box button:hover { background-color: #08303d; }
 
         /* Uma Div que imita uma foto de perfil apenas arredondando suas bordas */
         .perfil-mock {
             text-align: center;
-            color: #fefefe;
+            color: #006994;
             width: 110px;
             height: 35px;
             padding: 8px;
-            background-color: #bc1b1b;
+            background-color: #006994;
             border-radius: 10px; 
             cursor: pointer;
         }
@@ -95,12 +95,12 @@
 
         #layout-container a {
             text-decoration: none; /* Remove o sublinhado */
-             color: #fffcfc; ;         /* Muda a cor azul para a cor que preferir */
+             color: #08303d; ;         /* Muda a cor azul para a cor que preferir */
         }
 
         .perfil-mock a {
             text-decoration: none; /* Remove o sublinhado */
-             color: #fff4f4; ;         /* Muda a cor azul para a cor que preferir */
+             color: #ADD8E6; ;         /* Muda a cor azul para a cor que preferir */
         }
 
         /* =======================================================
@@ -115,7 +115,7 @@
         #barra-lateral {
             width: 240px; /* Largura fixa para a Div do menu */
             height: calc(100vh - 60px); 
-            background-color: #000000;
+            background-color: #89CFF0;
             padding: 12px;
             position: fixed;            
             left: 0; top: 60px;
@@ -126,7 +126,7 @@
             cursor: pointer; font-size: 14px; transition: background 0.2s; 
         }
         #barra-lateral li:hover, #barra-lateral li.ativo {
-            background-color: #ff0909; font-weight: bold;
+            background-color: #4682B4; font-weight: bold;
         }
 
         /* =======================================================
@@ -163,7 +163,7 @@
             border-radius: 12px; 
             overflow: hidden; /* Corta as pontas do vídeo interno para respeitar o border-radius */
             margin-bottom: 12px; 
-            background-color: #000;
+            background-color: #006994;
             transition: transform 0.3s;
         }
         .cartao-video:hover .video-wrapper {
@@ -186,9 +186,9 @@
         .textos-video h3 {
             font-size: 16px; font-weight: 500; line-height: 22px;
             margin-bottom: 6px; color: #f1f1f1;
-            color: #f1f1f1;
+            color: #000;
         }
-        .textos-video p { font-size: 14px; color: #f1f1f1; }
+        .textos-video p { font-size: 14px; color: #000; }
     </style>
 </head>
 <body>
@@ -196,7 +196,7 @@
     <header id="cabecalho-principal">
         <!-- DIV 1: Contêiner Flex para agrupar e alinhar a logo. -->
         <div class="logo-box">
-            <span>🔴</span> MeuTube - Minhas Músicas
+            <span>🔵</span> Shay's Tube
         </div>
         
         <!-- DIV 2: Contêiner para limitar o tamanho da barra de busca em 40%. -->
@@ -217,13 +217,13 @@
         <nav id="barra-lateral">
             <ul>
                 <li class="ativo">🏠 Início</li>
-                <li><a href="https://www.youtube.com/shorts" >📱 Shorts </a></li>
-                <li><a href="https://www.youtube.com"> 🔥 Em Alta </a> </li>
-                <li><a href="https://www.youtube.com/feed/subscriptions"> 📁 Inscrições </a> </li>
-                <hr style="border: 0; border-top: 1px solid #303030; margin: 10px 0;">
-                <li><a href="https://www.youtube.com/feed/playlists">📚 Playlists </a> </li>
-                <li><a href="https://www.youtube.com/feed/history">⏳ Histórico </a></li>
-                <li><a href="https://www.youtube.com">🎬 Seus Vídeos</a></li>
+                <li><a href="https://www.youtube.com/shorts" >🌍 Shorts </a></li>
+                <li><a href="https://www.youtube.com"> 🔝 Em Alta </a> </li>
+                <li><a href="https://www.youtube.com/feed/subscriptions"> 🎬 Inscrições </a> </li>
+                <hr style="border: 0; border-top: 1px solid #0f52ba; margin: 10px 0;">
+                <li><a href="https://www.youtube.com/feed/playlists">🎵 Playlists </a> </li>
+                <li><a href="https://www.youtube.com/feed/history">🔙 Histórico </a></li>
+                <li><a href="https://www.youtube.com">🫴🏽 Seus Vídeos</a></li>
             </ul>
         </nav>
 
@@ -237,100 +237,74 @@
                     
                     <!-- DIV DO VÍDEO: Uma Div separada só para conter o iframe, permitindo aplicar bordas arredondadas e sombras. -->
                     <div class="video-wrapper">
-                    <iframe width="560" height="315" 
-                    src="https://www.youtube.com/embed/Zznit8LDZMg?si=gMXl4cpEfiGFRfkc" 
-                    title="YouTube video player" frameborder="0" allow="accelerometer; 
-                    autoplay; 
-                    clipboard-write; 
-                    encrypted-media; 
-                    gyroscope; 
-                    picture-in-picture; 
-                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                    </iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/RJPfAhIqU4I?si=8zNgDB7Fl_bqsy2B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     
                     </div>
                     
                     <!-- DIV DE INFORMAÇÕES: Agrupa a foto de perfil e os textos usando Flexbox para alinhá-los em linha. -->
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #895129;"></div>
                         <!-- DIV DE TEXTOS: Agrupa Título e Parágrafos para mantê-los empilhados perfeitamente à direita da foto. -->
                         <div class="textos-video">
-                            <h3>Panda - Má Influência</h3>
-                            <p>Panda</p>
-                            <p>Sertanejo</p>
+                            <h3>abri um MERCADO, só que no INFERNO</h3>
+                            <p>T3ddy, só que games</p>
+                            <p>Meu youtuber de Games</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/iYjz1Ap1VvU?si=9vL-i3eJtzz31lBH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/6CqeGHXXioU?si=7R2ymd3cMqxLERAJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #FF0000"></div>
                         <div class="textos-video">
-                            <h3>Grupo Menos É Mais, NATTAN - Pela Última Vez</h3>
-                            <p>Grupo Menos é Mais e Nattan</p>
-                            <p>Pagode</p>
+                            <h3>Stray Kids "FARMING" Video  </h3>
+                            <p>Stray Kids</p>
+                            <p>Eles são meu grupo favorito de kpop</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/_k2ty4A5x1w?si=ieP8QWKGxJrmHU-O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                     <iframe width="560" height="315" src="https://www.youtube.com/embed/YHTTC0gEmL0?si=dcncgmldbCepiNEv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #7B3F00;"></div>
                         <div class="textos-video">
-                            <h3>Henrique e Juliano - Realidade ou Fantasia</h3>
-                            <p>Mason Section</p>
-                            <p>Minha musica favorita</p>
+                            <h3>VOLTEI ÀS AULAS! MEU PRIMEIRO DIA NO 3º ANO DO ENSINO MÉDIO! 🎒😭 (Acordei às 5h)</h3>
+                            <p>Bia Amaral</p>
+                            <p>Porque ela é minha youtuber favorita</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EhlhRIJygPM?si=UbmWBnio0MPBrq3i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g16EmUBgwW8?si=ILc6eQlk1dQoZYhh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #000000"></div>
                         <div class="textos-video">
-                            <h3>Jorge e Mateus - Os anjos cantam</h3>
-                            <p>Jorge & Mateus Oficial</p>
-                            <p>Porque eu gosto muito das musicas deles</p>
+                            <h3>CHAMEI O EVERSON ZOIO PRA SER MEU DJ ( fritada insana )</h3>
+                            <p>Bistecone</p>
+                            <p>Meu streamer favorito</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/HR4ZxjGQGYY?si=DevtPI9JyGwTKQU5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-                     
+<iframe width="560" height="315" src="https://www.youtube.com/embed/47YClVMlthI?si=7XTLyq_e-uhCdYuU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #A57343;"></div>
                         <div class="textos-video">
-                            <h3>Jorge e Mateus - Duas Metades</h3>
-                            <p>Jorge & Mateus Oficial</p>
-                            <p>Umas das musicas favoritas</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="cartao-video">
-                    <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zeJ3KpmgIwA?si=e4TT1ViCEr0T6Xw2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
-                        <div class="textos-video">
-                            <h3>Flamengo x River Plate</h3>
-                            <p>Espn Brasil</p>
-                            <p>Um jogo historico do meu time</p>
+                            <h3>Justin Bieber - Confident ft. Chance The Rapper</h3>
+                            <p>Justin Bieber</p>
+                            <p>Porque eu sou viciada nessa música</p>
                         </div>
                     </div>
                 </div>
@@ -338,14 +312,14 @@
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/aq-DH4iwviE?si=CmRnbrovMdZSYwUV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aNr01u0cBUc?si=cMyJ5nvdagFcEV4G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #FF0000;"></div>
                         <div class="textos-video">
-                            <h3>Matuê - 333</h3>
-                            <p>30PRAUM</p>
-                            <p>Gosto do Estilo Musical do Cantor</p>
+                            <h3>충돌 Collision</h3>
+                            <p>Stray Kids</p>
+                            <p>Gênero Musical</p>
                         </div>
                     </div>
                 </div>
@@ -353,16 +327,14 @@
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/jZciTXk5b8M?si=HyIVJ_pyvLl7l4rt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-
-                        </iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gwMa6gpoE9I?si=6Ez85lGCK8NY1H4n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color:#F5F5DC; "></div>
                         <div class="textos-video">
-                            <h3>Neymar Jr</h3>
-                            <p>Neymar Jr</p>
-                            <p>Gosto do Jogador e Acompanhar os Vlog dele</p>
+                            <h3>BTS (방탄소년단) 'ON' Kinetic Manifesto Film : Come Prima</h3>
+                            <p>BTS</p>
+                            <p>Minha música favorita do bts</p>
                         </div>
                     </div>
                 </div>
@@ -370,50 +342,32 @@
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/mZ0Snvc1rHE?si=4q_WWW99r7tAI-x7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-
-                        </iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7ILalDW_pDg?si=0DUAXmiRvP8CpHxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #895129;"></div>
                         <div class="textos-video">
-                            <h3>Mc Cabelinho - Ringue da Vida</h3>
-                            <p>Mc Cabelinho</p>
-                            <p>Meu Cantor Favorito</p>
+                            <h3>abri CAIXAS MISTERIOSAS que comprei na internet</h3>
+                            <p>T3ddy</p>
+                            <p>Meu youtuber favorito</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="cartao-video">
-                    <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/daDOZK_MObs?si=bmrfj4wRKiPYczOm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                        </iframe> 
-                    </div>
-                    <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
-                        <div class="textos-video">
-                            <h3>Mc Cabelinho - Quem me dera</h3>
-                            <p>Mc Cabelinho</p>
-                            <p>Meu Cantor Favorito</p>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="cartao-video">
                     <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/I7qbgUllzsA?si=RbB9ynhj-rcMgtbD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                        </iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-Ql6axlIygw?si=l9c021WJpT3_oG1v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="info-video">
-                        <div class="canal-avatar" style="background-color: #ff0909;"></div>
+                        <div class="canal-avatar" style="background-color: #895129;"></div>
                         <div class="textos-video">
-                            <h3>Julia Souza - 1 ano da Tiana</h3>
-                            <p>Julia Souza</p>
-                            <p>Influencer que eu mais acompanho</p>
+                            <h3>Chamei o Brino só pra gente provar Açaí caro vs Açaí mais barato</h3>
+                            <p>T3ddy & Brino</p>
+                            <p>Gosto dos dois juntos, parecem eu e a tefy</p>
                         </div>
                     </div>
                 </div>
-            
 
             </div>
         </main>
