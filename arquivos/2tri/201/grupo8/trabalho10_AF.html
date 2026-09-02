@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuTube Premium</title>
+    
+    <style>
+        /* =======================================================
+           1. RESET E BOX MODEL
+           ======================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            /* O SEGREDO DAS DIVS: 'box-sizing: border-box' garante que o 
+               espaçamento interno (padding) e a borda não aumentem o tamanho 
+               total das nossas Divs. Sem isso, o layout quebra! */
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #121212; 
+            overflow-x: hidden;
+        }
+
+
+        /* =======================================================
+           2. FLEXBOX NO CABEÇALHO
+           O #cabecalho-principal é um contêiner Flex. 
+           ======================================================= */
+        #cabecalho-principal {
+            /* display: flex; transforma este elemento em uma linha flexível,
+               permitindo que as Divs dentro dele fiquem lado a lado. */
+            display: flex;
+            /* space-between joga a 1ª Div para a esquerda, a 2ª para o meio 
+               e a 3ª para a direita, distribuindo o espaço. */
+            justify-content: space-between; 
+            align-items: center;            
+            background-color: #121212;
+            padding: 12px 24px; /* Espaço interno para a Div não esmagar o conteúdo */
+            position: fixed;                
+            top: 0; left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 100;                   
+        }
+
+        /* Esta é uma Div interna do cabeçalho. Ela também usa Flexbox
+           para alinhar o ícone e o texto lado a lado! */
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* gap define a distância exata entre os itens dentro da Div */
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            color:white
+        }
+        .logo-box span { color: #white; }
+
+        /* A Div da busca: controlamos a largura dela para ocupar 40% da tela */
+        .busca-box {
+            display: flex;
+            width: 40%;
+        }
+        .busca-box input {
+            width: 100%;
+            padding: 10px 16px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 40px 0 0 40px; 
+            color: rgb(0, 0, 0); outline: none;
+        }
+        .busca-box button {
+            padding: 0 20px;
+            background-color: #170994;
+            border: 1px solid #000000; border-left: none; 
+            border-radius: 0 40px 40px 0; 
+            color: rgb(253, 252, 252); cursor: pointer;
+        }
+        .busca-box button:hover { background-color: #272727; }
+
+        /* Uma Div que imita uma foto de perfil apenas arredondando suas bordas */
+        .perfil-mock {
+            text-align: center;
+            color: #fcfcfc;
+            width: 130px;
+            height: 35px;
+            padding: 8px;
+            background-color: #170994;
+            border-radius: 10px; 
+            cursor: pointer;
+        }
+
+
+        #layout-container a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #ffffff; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        .perfil-mock a {
+            text-decoration: none; /* Remove o sublinhado */
+             color: #ffffff; ;         /* Muda a cor azul para a cor que preferir */
+        }
+
+        /* =======================================================
+           3. ESTRUTURA PRINCIPAL (DIVS DE LAYOUT)
+           O #layout-container é a "Super Div" que segura o Menu e os Vídeos.
+           ======================================================= */
+        #layout-container {
+            display: flex; /* Coloca o Menu (esquerda) e Vídeos (direita) lado a lado */
+            margin-top: 60px; /* Empurra essa Div para baixo para não sumir sob o cabeçalho */
+        }
+
+        #barra-lateral {
+            width: 240px; /* Largura fixa para a Div do menu */
+            height: calc(100vh - 60px); 
+            background-color: #121212;
+            padding: 12px;
+            position: fixed;            
+            left: 0; top: 60px;
+        }
+        #barra-lateral ul { list-style-type: none; }
+        #barra-lateral li {
+            padding: 12px 20px; border-radius: 10px; margin-bottom: 4px;
+            cursor: pointer; font-size: 14px; transition: background 0.2s; 
+            color: #ffffff;
+        }
+        #barra-lateral li:hover, #barra-lateral li.ativo {
+            background-color: #170994; font-weight: bold;
+        }
+
+        /* =======================================================
+           4. CSS GRID (A DIV MAIS PODEROSA)
+           ======================================================= */
+        #conteudo-videos {
+            flex-grow: 1; /* Faz essa Div crescer e ocupar todo o resto da tela */
+            margin-left: 240px; /* Empurra 240px para a direita para não ficar sob o menu */
+            padding: 24px;
+        }
+
+        /* A Div .grade-videos não usa Flexbox, usa GRID! 
+           Isso cria uma "tabela" invisível na tela. */
+        .grade-videos {
+            display: grid;
+            /* auto-fill e minmax criam colunas responsivas: cada vídeo terá 
+               no mínimo 300px. Se a tela crescer, ele cria mais colunas sozinho! */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 40px 16px; /* Espaçamento vertical e horizontal entre os vídeos */
+        }
+
+        /* =======================================================
+           5. DIVS DOS VÍDEOS (BOX MODEL APLICADO)
+           ======================================================= */
+        .cartao-video {
+            display: flex;
+            flex-direction: column; /* Coloca o vídeo em cima e o texto embaixo */
+            cursor: pointer;
+            background-color:#1E1E1E
+            border: radius 10px;
+        }
+
+        /* Div que "encapsula" o vídeo para podermos arredondar as bordas */
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px; 
+            overflow: hidden; /* Corta as pontas do vídeo interno para respeitar o border-radius */
+            margin-bottom: 12px; 
+            background-color: #000000;
+            transition: transform 0.3s;
+        }
+        .cartao-video:hover .video-wrapper {
+            transform: scale(1.02); /* Efeito de zoom na Div ao passar o mouse */
+        }
+        .cartao-video iframe { width: 100%; display: block; border: none; }
+
+        /* Div que organiza a foto redonda e os textos alinhados ao lado dela */
+        .info-video {
+            display: flex;
+            gap: 12px;
+        }
+
+        .canal-avatar {
+            width: 36px; height: 36px; background-color: #170994;
+            border-radius: 50%;
+            flex-shrink: 0; /* Impede que essa Div amasse se o título for muito longo */
+        }
+
+        .textos-video h3 {
+            font-size: 16px; font-weight: 500; line-height: 22px;
+            margin-bottom: 6px; color: hsl(188, 48%, 94%);
+            color: #ffffff;
+        }
+        .textos-video p { font-size: 14px; color: #aaaaaa; }
+    </style>
+</head>
+<body>
+
+    <header id="cabecalho-principal">
+        <!-- DIV 1: Contêiner Flex para agrupar e alinhar a logo. -->
+        <div class="logo-box">
+            <span>🔵</span>MeuTube | Minhas Músicas e Vídeos
+        </div>
+        
+        <!-- DIV 2: Contêiner para limitar o tamanho da barra de busca em 40%. -->
+        <div class="busca-box">
+            <input type="text" placeholder="Pesquisar">
+            <button>🔍</button>
+        </div>
+
+        <!-- DIV 3: Usada puramente para criar um elemento visual (o círculo de perfil). -->
+        <div class="perfil-mock">
+            <a href="https://marcelo-padilha.github.io/trabalhos_HTML-CSS/index.html">+ TRABALHOS</a>
+        </div>
+    </header>
+
+    <!-- SUPER DIV: Envolve o Menu e a área de Vídeos, usando Flexbox para colocá-los lado a lado. -->
+    <div id="layout-container">
+
+        <nav id="barra-lateral">
+            <ul>
+                <li class="ativo">🏠 Início</li>
+                <li><a href="https://www.youtube.com/shorts" >📱 Shorts </a></li>
+                <li><a href="https://www.youtube.com"> 🔥 Em Alta </a> </li>
+                <li><a href="https://www.youtube.com/feed/subscriptions"> 📁 Inscrições </a> </li>
+                <hr style="border: 0; border-top: 1px solid #303030; margin: 10px 0;">
+                <li><a href="https://www.youtube.com/feed/playlists">📚 Playlists </a> </li>
+                <li><a href="https://www.youtube.com/feed/history">⏳ Histórico </a></li>
+                <li><a href="https://www.youtube.com">🎬 Seus Vídeos</a></li>
+            </ul>
+        </nav>
+
+        <main id="conteudo-videos">
+            
+            <!-- DIV GRID: Esta Div ativa o CSS Grid, transformando seus "filhos" em itens de uma grade responsiva. -->
+            <div class="grade-videos">
+
+                <!-- DIV DO CARTÃO: Cada vídeo e seus textos são agrupados dentro desta Div para formarem um bloco único. -->
+                <div class="cartao-video">
+                    
+                    <!-- DIV DO VÍDEO: Uma Div separada só para conter o iframe, permitindo aplicar bordas arredondadas e sombras. -->
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/Zznit8LDZMg?si=gMXl4cpEfiGFRfkc" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; 
+                    autoplay; 
+                    clipboard-write; 
+                    encrypted-media; 
+                    gyroscope; 
+                    picture-in-picture; 
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    
+                    </div>
+                    
+                    <!-- DIV DE INFORMAÇÕES: Agrupa a foto de perfil e os textos usando Flexbox para alinhá-los em linha. -->
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <!-- DIV DE TEXTOS: Agrupa Título e Parágrafos para mantê-los empilhados perfeitamente à direita da foto. -->
+                        <div class="textos-video">
+                            <h3>Panda - Má Influência</h3>
+                            <p>Panda</p>
+                            <p>Sertanejo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/iYjz1Ap1VvU?si=9vL-i3eJtzz31lBH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Grupo Menos É Mais, NATTAN - Pela Última Vez</h3>
+                            <p>Grupo Menos é Mais e Nattan</p>
+                            <p>Pagode</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/QRjHFVt6Suw?si=dNLw37BUgvmzQKzs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Fede Vigevani - COMPREI UM PALHAÇO NA DEEP WEEB</h3>
+                            <p>Fede Vigevani</p>
+                            <p>Gosto muito desse tipo de conteudo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/pe_ejTiIcSs?si=3hkbNq-3ExD82Gx_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>MrBeast - Perca 45 kg e ganhe US$ 250 mil!</h3>
+                            <p>MrBeast</p>
+                            <p>Gosto do plot twist do video</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/EYIs3XVGB94?si=a49Hd0QCjJ7WtblZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                     
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Yolo - INVADIMOS LA CASA DE SOFÍA CASTRO POR 24 HORAS</h3>
+                            <p>Yolo </p>
+                            <p>Gostava de assistir</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HjWMpXwzpSU?si=2cEMZ4z0yvIYdj9m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Marina Sena - que delícia o verão feat. Pabllo Vittar</h3>
+                            <p>Marina Sena</p>
+                            <p>Forró eletrônico</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/V1Pl8CzNzCw?si=KdgA4tsJ3DsIdPyC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Billie Eilish, Khalid - lovely</h3>
+                            <p>Billie Eilish</p>
+                            <p>Chamber pop</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/82-jTNka3uc?si=jQvogxboWfg501r7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Ariana Grande - hate that i made you love me</h3>
+                            <p>Ariana Grande</p>
+                            <p>Alt-pop</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/kPa7bsKwL-c?si=y7Pilfyp1JCU5JDX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Lady Gaga, Bruno Mars - Die With A Smile </h3>
+                            <p>Lady Gaga</p>
+                             <p>Pop-soul</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gcgKUcJKxIs?si=A1uhdmFwnLW9OP67" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Abertura de jujutsu kaisen</h3>
+                            <p>jujutsu kaisen</p>
+                            <p>E um dos meus animes favoritos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cartao-video">
+                    <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/pJ_4ZhSwcdY?si=y5M7v2jEGNmyljH5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </iframe> 
+                    </div>
+                    <div class="info-video">
+                        <div class="canal-avatar" style="background-color: #1769E0;"></div>
+                        <div class="textos-video">
+                            <h3>Por Que Você NÃO SOBREVIVERIA na FLORESTA AMALDIÇOADA em "BRUXA DE BLAIR"</h3>
+                            <p>Derrotando filmes</p>
+                            <p>Gosto de ver resumos de filmes</p>
+                        </div>
+                    </div>
+                </div>
+            
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
