@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kermitron - Contato e Equipe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <header id="cabecalho-principal">
+        <div class="logo">
+           
+           <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+            <h1 style="
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00ff41;
+">
+    KERMITRON
+        </h>
+        </div>
+
+        <nav class="menu-navegacao">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="historia.html">Nossa História</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="localizacao.html">Localização</a></li>
+                <li><a href="contato.html" class="link-ativo">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PARTE 1: Formulário de Contato para Clientes -->
+        <section class="secao-formulario">
+            <h1>Entre em contato conosco!</h1>
+            <p style="background: linear-gradient(to right, #b1ffa3, #2bff00); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: bold;">
+    Para ajudar a vida de alguns, entre em contato diretamente com nossa equipe de especialista!<p> </p>
+
+            <form class="formulario-fale-conosco">
+                <div class="campo-form">
+                    <label for="nome"> Nome: </label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="email"> Email para contato: </label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="assunto"> Selecione o devido assunto</label>
+
+                    <select id="assunto" name="assunto">
+                        <option value="duvida"> Duvidas </option>
+                        <option value="orcamento"> Negociação </option>
+                        <option value="reclamacao"> Falar com o vendedor </option>
+                        <option value="reclamacao"> Sugerir console </option>
+                        <option value="reclamacao"> Relatar erro </option>
+                        <option value="reclamacao"> Problemas com entrega </option>
+                        <option value="outro"> Outros... </option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="mensagem"> Escreva sua mensagem :</label>
+                    <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva aqui. . ." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar"> Enviar </button>
+            </form>
+        </section>
+
+        </br>
+
+        <hr class="divisor-secoes">
+
+            </br>
+
+
+        <!-- PARTE 2: Créditos Acadêmicos e Desenvolvedores (Integrantes do Grupo) -->
+        <section class="secao-creditos">
+            <h2>Créditos do Projeto e Desenvolvedores</h2>
+            <div class="info-disciplina">
+                <p><strong>Disciplina:</strong> HTML & CSS</p>
+                <!-- ALUNO: Digite o nome do seu professor -->
+                <p><strong>Professor Orientador:</strong> <a href="https://linktr.ee/marcelo.padilha">Prof. Marcelo Padilha</a></p>
+                <p><strong>Turma/Ano:</strong> Turma 202 - 2026</p>
+            </div>
+
+                </br>
+
+
+            <h3>Alunos Desenvolvedores:</h3>
+            <div class="galeria-desenvolvedores">
+                
+                <!-- INTEGRANTE 1 -->
+                <div class="card-aluno">
+                    <!-- ALUNO: Substitua a foto por um avatar ou foto do integrante -->
+                    <img src="gustavo (1).png" alt="Foto do Aluno 1">
+                    <h4> GUSTAVO SHEFFER CAMARINHA</h4>
+                    <p class="funcao-aluno">Líder do Projeto / Dev HTML</p>
+                </div>
+
+                <!-- INTEGRANTE 2 -->
+                <div class="card-aluno">
+                    <img src="caio (1).png" alt="Foto do Aluno 2">
+                    <h4> CAIO VIEIRA TEIXEIRA</h4>
+                    <p class="funcao-aluno">Desenvolvedor HTML/CSS</p>
+                 
+                </div>
+
+                <!-- INTEGRANTE 3 -->
+                <div class="card-aluno">
+                    <img src="ricardo.jpg" alt="Foto do Aluno 3">
+                    <h4>RICARDO LUCAS SILVA LIMA</h4>
+                    <p class="funcao-aluno">Designer / Conteúdo</p>
+                </div>
+
+              
+
+                 <!-- INTEGRANTE 5 -->
+                <div class="card-aluno">
+                    <img src="joao (1).jpg" alt="Foto do Aluno 5">
+                    <h4>JOÃO GABRIEL DE OLIVEIRA </h4>
+                    <p class="funcao-aluno">Documentação</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+      <footer id="rodape-principal">
+        <p>&copy; 2026 - Kermitron. Todos os direitos reservados.</p>
+        <p>Projeto Escolar desenvolvido para a disciplina de HTML/CSS - Prof. Marcelo Padilha.</p>
+        <p>Escola Estadual Nyrce Villa Verde Coelho de Magalhães</p>
+    </footer>
+
+
+</body>
+</html>
