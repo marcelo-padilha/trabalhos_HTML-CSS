@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Moda - Contato e Equipe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="cabecalho-principal">
+        <div class="logo">
+            <h1>Nova Moda</h1>
+        </div>
+        <nav class="menu-navegacao">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="historia.html">Nossa História</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="localizacao.html">Localização</a></li>
+                <li><a href="contato.html" class="link-ativo">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PARTE 1: Formulário de Contato para Clientes -->
+        <section class="secao-formulario">
+            <h1>Entre em contato conosco!</h1>
+            <p> </p>
+
+            <form class="formulario-fale-conosco">
+                <div class="campo-form">
+                    <label for="nome">NOMES </label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="email">EMEIL</label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="assunto">ASSUNTO</label>
+
+                    <select id="assunto" name="assunto">
+                        <option value="duvida"> </option>
+                        <option value="orcamento"></option>
+                        <option value="reclamacao"> </option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="mensagem">DUVIDAS:</label>
+                    <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar">ENTRE EM CONTATO </button>
+            </form>
+        </section>
+
+        </br>
+
+        <hr class="divisor-secoes">
+
+            </br>
+
+
+        <!-- PARTE 2: Créditos Acadêmicos e Desenvolvedores (Integrantes do Grupo) -->
+        <section class="secao-creditos">
+            <h2>Créditos do Projeto e Desenvolvedores</h2>
+            <div class="info-disciplina">
+                <p><strong>Disciplina:</strong> HTML & CSS</p>
+                <!-- ALUNO: Digite o nome do seu professor -->
+                <p><strong>Professor Orientador:</strong> <a href="https://linktr.ee/marcelo.padilha">Prof. Marcelo Padilha</a></p>
+                <p><strong>Turma/Ano:</strong> Turma 201 - 2026</p>
+            </div>
+
+                </br>
+
+
+            <h3>Alunos Desenvolvedores:</h3>
+            <div class="galeria-desenvolvedores">
+                
+                <!-- INTEGRANTE 1 -->
+                <div class="card-aluno">
+                    <!-- ALUNO: Substitua a foto por um avatar ou foto do integrante -->
+                    <img src="https://via.placeholder.com/100" alt="Foto do Aluno 1">
+                    <h4>Maria Luiza Mariano Gomes Fernandes 1</h4>
+                    <p class="funcao-aluno">Líder do Projeto / Dev HTML</p>
+                </div>
+
+                <!-- INTEGRANTE 2 -->
+                <div class="card-aluno">
+                    <img src="https://via.placeholder.com/100" alt="Foto do Aluno 2">
+                    <h4> Rian Adriano Damasio</h4>
+                    <p class="funcao-aluno">Desenvolvedor CSS</p>
+                </div>
+
+                <!-- INTEGRANTE 3 -->
+                <div class="card-aluno">
+                    <img src="https://via.placeholder.com/100" alt="Foto do Aluno 3">
+                    <h4>Esdras Gabriel de Paula Ferreira </h4>
+                    <p class="funcao-aluno">Designer / Conteúdo</p>
+                </div>
+
+                <!-- INTEGRANTE 4 -->
+                <div class="card-aluno">
+                    <img src="https://via.placeholder.com/100" alt="Foto do Aluno 4">
+                    <h4>Gustavo Simplicio de Oliveira Lima</h4>
+                    <p class="funcao-aluno">Desenvolvedor HTML</p>
+                </div>
+
+
+            </div>
+        </section>
+    </main>
+
+      <footer id="rodape-principal">
+        <p>&copy; 2026 - Nova Moda. Todos os direitos reservados.</p>
+        <p>Projeto Escolar desenvolvido para a disciplina de HTML/CSS - Prof. Marcelo Padilha.</p>
+        <p>Escola Estadual Nyrce Villa Verde Coelho de Magalhães</p>
+    </footer>
+
+
+</body>
+</html>
