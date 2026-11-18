@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanted Dreams - Contato e Equipe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="cabecalho-principal">
+            <!-- ALUNO: Altere para o nome do seu estabelecimento ou troque a tag h1 por uma tag <img> -->
+        <div class="imagem">
+            <img src="logo.jpeg"
+            alt="Logo da empresa"
+            height="100px">
+        </div> 
+        <div class="logo"></div>
+            <h1>Enchanted Dreams</h1>
+        </div>
+
+        <nav class="menu-navegacao">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="historia.html">Nossa História</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="localizacao.html">Localização</a></li>
+                <li><a href="contato.html" class="link-ativo">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- PARTE 1: Formulário de Contato para Clientes -->
+
+        <section class="secao-formulario">
+
+            <h1>Entre em Contato com a Enchanted Dreams</h1>
+
+            <p>
+                ㅤEntre em contato com a Enchanted Dreams para tirar dúvidas,
+                solicitar informações sobre nossos produtos ou enviar
+                sugestões. Será um prazer atender você!
+            </p>
+
+
+            <form class="formulario-fale-conosco">
+
+                <div class="campo-form">
+                    <label for="nome">Nome:</label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite seu nome..."
+                        required
+                    >
+                </div>
+
+
+                <div class="campo-form">
+                    <label for="email">E-mail:</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="exemplo@email.com"
+                        required
+                    >
+                </div>
+
+
+                <div class="campo-form">
+                    <label for="assunto">Assunto:</label>
+
+                    <select id="assunto" name="assunto">
+
+                        <option value="duvida">
+                            Dúvida sobre produtos
+                        </option>
+
+                        <option value="orcamento">
+                            Solicitação de orçamento
+                        </option>
+
+                        <option value="reclamacao">
+                            Sugestão ou reclamação
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="campo-form">
+                    <label for="mensagem">Mensagem:</label>
+
+                    <textarea
+                        id="mensagem"
+                        name="mensagem"
+                        rows="5"
+                        placeholder="Escreva sua mensagem..."
+                        required
+                    ></textarea>
+                </div>
+
+
+                <button type="submit" class="btn-enviar">
+                    Enviar Mensagem
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <br>
+
+        <hr class="divisor-secoes">
+
+        <br>
+
+
+        <!-- PARTE 2: Créditos Acadêmicos e Desenvolvedores -->
+
+        <section class="secao-creditos">
+
+            <h2>Créditos do Projeto e Desenvolvedores</h2>
+
+            <div class="info-disciplina">
+
+                <p>
+                    <strong>Disciplina:</strong>
+                    HTML & CSS
+                </p>
+
+                <p>
+                    <strong>Professor Orientador:</strong>
+                    <a href="https://linktr.ee/marcelo.padilha">
+                        Prof. Marcelo Padilha
+                    </a>
+                </p>
+
+                <p>
+                    <strong>Turma/Ano:</strong>
+                    2º Ano do Ensino Médio - 2026
+                </p>
+
+            </div>
+
+
+            <br>
+
+
+            <h3>Alunos Desenvolvedores:</h3>
+
+            <div class="galeria-desenvolvedores">
+
+
+                <!-- INTEGRANTE 1 -->
+
+                <div class="card-aluno">
+
+                    <img
+                        src="menina.png" width="100" height="100"
+                        alt="Foto de Ana Vitória"
+                    >
+
+                    <h4>Ana Vitória</h4>
+
+                    <p class="funcao-aluno">
+                        Desenvolvedora CSS
+                    </p>
+
+                </div>
+
+
+                <!-- INTEGRANTE 2 -->
+
+                <div class="card-aluno">
+
+                    <img
+                        src="avatares.png" width="100" height="100"
+                        alt="Foto de Bryan Gama Silva"
+                    >
+
+                    <h4>Bryan Gama Silva</h4>
+
+                    <p class="funcao-aluno">
+                        Líder do Projeto / Dev HTML
+                    </p>
+
+                </div>
+
+
+                <!-- INTEGRANTE 3 -->
+
+                <div class="card-aluno">
+
+                    <img
+                        src="homem-de-negocios.png" width="100" height="100"
+                        alt="Foto de Eduardo de Castro"
+                    >
+
+                    <h4>Eduardo de Castro</h4>
+
+                    <p class="funcao-aluno">
+                        Designer / Conteúdo
+                    </p>
+
+                </div>
+
+
+                <!-- INTEGRANTE 4 -->
+
+                <div class="card-aluno">
+
+                    <img
+                        src="hacker.png" width="100" height="100"
+                        alt="Foto de Kauã Rocha"
+                    >
+
+                    <h4>Kauã Rocha</h4>
+
+                    <p class="funcao-aluno">
+                        Desenvolvedor HTML
+                    </p>
+
+                </div>
+
+
+                <!-- INTEGRANTE 5 -->
+
+                <div class="card-aluno">
+
+                    <img
+                        src="avatar-de-menina.png" width="100" height="100"
+                        alt="Foto de Shayene Diniz"
+                    >
+
+                    <h4>Shayene Diniz</h4>
+
+                    <p class="funcao-aluno">
+                        Testes e Documentação
+                    </p>
+
+                </div>
+
+
+                <!-- INTEGRANTE 6 -->
+
+                <div class="card-aluno">
+
+                    <img
+                        src="mulher.png" width="100" height="100"
+                        alt="Foto de Sthephany Gabrielly"
+                    >
+
+                    <h4>Sthephany Gabrielly</h4>
+
+                    <p class="funcao-aluno">
+                        Organização do Projeto
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer id="rodape-principal">
+
+        <p>
+            &copy; 2026 - Enchanted Dreams. Todos os direitos reservados.
+        </p>
+
+        <p>
+            Projeto Escolar desenvolvido para a disciplina de HTML/CSS -
+            Prof. Marcelo Padilha.
+        </p>
+
+        <p>
+            Escola Estadual Nyrce Villa Verde Coelho de Magalhães
+        </p>
+
+    </footer>
+
+
+</body>
+</html>
