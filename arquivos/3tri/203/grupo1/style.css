@@ -10,8 +10,8 @@
 body {
     /* ALUNO: Altere a família da fonte e a cor de fundo padrão do site */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #966636;
-    color: #fbf3a7;
+    background-color: #ffdfa2;
+    color: #080808;
     line-height: 1.6;
 }
 
@@ -27,8 +27,8 @@ main {
    ======================================================= */
 #cabecalho-principal {
     /* ALUNO: Defina a cor principal da identidade visual do seu site */
-    background-color: #fd853a; 
-    color: #fffffd;
+    background-color: #4d2d1a; 
+    color: #ffffff;
     padding: 15px 30px;
     
     /* FLEXBOX: Alinha a logo à esquerda e o menu à direita */
@@ -60,12 +60,12 @@ main {
 /* Efeito ao passar o mouse sobre os botões do menu */
 .menu-navegacao a:hover {
     /* ALUNO: Escolha a cor do destaque ao passar o mouse */
-    background-color: #a5bfe9;
+    background-color: #6d5942;
 }
 
 /* Classe do link referente à página atual aberta */
 .link-ativo {
-    background-color: #f1f38d;
+    background-color: #c59e63;
     font-weight: bold;
 }
 
@@ -74,7 +74,7 @@ main {
    ======================================================= */
 .banner-destaque {
     /* ALUNO: Personalize o fundo do banner inicial com cor ou imagem */
-    background-color: #e2e8f0;
+    background-color: #c59e63;
     padding: 50px 20px;
     text-align: center;
     border-radius: 8px;
@@ -83,7 +83,7 @@ main {
 
 .botao-acao, .btn-comprar, .btn-enviar {
     display: inline-block;
-    background-color: #10b981; /* ALUNO: Altere a cor dos botões principais */
+    background-color: #4d2d1a; /* ALUNO: Altere a cor dos botões principais */
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -95,7 +95,7 @@ main {
 }
 
 .botao-acao:hover, .btn-comprar:hover, .btn-enviar:hover {
-    background-color: #059669;
+    background-color: #8d6f47;
 }
 
 .container-cards-destaque {
@@ -105,8 +105,8 @@ main {
 }
 
 .card-destaque {
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
+    background-color: #c59e63;
+    border: 1px solid #a57f53;
     padding: 20px;
     flex: 1;
     border-radius: 6px;
@@ -126,8 +126,8 @@ main {
 }
 
 .bloco-mvv {
-    background: white;
-    border-top: 4px solid #abf6e5; /* ALUNO: Detalhe de cor no topo dos blocos */
+    background: #eec07b;
+    border-top: 4px solid #5e3e31; /* ALUNO: Detalhe de cor no topo dos blocos */
     padding: 20px;
     flex: 1;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -145,8 +145,8 @@ main {
 }
 
 .cartao-item {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
+    background-color: #d6b294;
+    border: 1px solid #6e5341;
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
@@ -160,7 +160,7 @@ main {
 }
 
 .preco-item {
-    color: #91f1d1;
+    color: #331e11;
     font-weight: bold;
     font-size: 18px;
     margin: 10px 0;
@@ -177,17 +177,17 @@ main {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
-    background-color: rgb(194, 6, 0);
+    background-color: #d8ad6d;
 }
 
 .tabela-horarios th, .tabela-horarios td {
-    border: 1px solid #cbd5e1;
+    border: 1px solid #3d2a1b;
     padding: 12px;
     text-align: left;
 }
 
 .tabela-horarios th {
-    background-color: #cd3217;
+    background-color: #61331b;
     color: rgb(245, 241, 241);
 }
 
@@ -214,7 +214,7 @@ main {
 
 .campo-form input, .campo-form select, .campo-form textarea {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #271609;
     border-radius: 4px;
 }
 
@@ -226,8 +226,8 @@ main {
 }
 
 .card-aluno {
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: #dfba82;
+    border: 1px solid #331d10;
     padding: 15px;
     text-align: center;
     border-radius: 6px;
@@ -243,8 +243,8 @@ main {
    8. RODAPÉ
    ======================================================= */
 #rodape-principal {
-    background-color: #dbdfe9;
-    color: #94a3b8;
+    background-color: #3a2813;
+    color: #feffff;
     text-align: center;
     padding: 20px;
     margin-top: 50px;
