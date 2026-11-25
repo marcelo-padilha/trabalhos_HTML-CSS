@@ -1,0 +1,264 @@
+/* =======================================================
+   1. RESET E PADRÕES GERAIS
+   ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* ALUNO: Altere a família da fonte e a cor de fundo padrão do site */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url(img1.jpg);
+    background-size: cover;
+    background-position:center ;
+    background-attachment: fixed;
+    color: #fbfbfc;
+    line-height: 1.6;
+}
+
+/* Espaçamento geral do conteúdo principal */
+main {
+    padding: 30px 20px;
+    max-width: 1100px;
+    margin: 0 auto; /* Centraliza a caixa principal na tela */
+}
+
+/* =======================================================
+   2. CABEÇALHO E MENU DE NAVEGAÇÃO
+   ======================================================= */
+#cabecalho-principal {
+    /* ALUNO: Defina a cor principal da identidade visual do seu site */
+    background-color: #260224; 
+    color: #fbfbf9;
+    padding: 15px 30px;
+    
+    /* FLEXBOX: Alinha a logo à esquerda e o menu à direita */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.menu-navegacao ul {
+    list-style: none;
+    /* FLEXBOX: Deixa os itens do menu em linha */
+    display: flex;
+    gap: 15px;
+}
+
+.menu-navegacao a {
+    color: #f8f8f8;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Efeito ao passar o mouse sobre os botões do menu */
+.menu-navegacao a:hover {
+    /* ALUNO: Escolha a cor do destaque ao passar o mouse */
+    background-color: #010101;
+}
+
+/* Classe do link referente à página atual aberta */
+.link-ativo {
+    background-color: #000000;
+    font-weight: bold;
+}
+
+/* =======================================================
+   3. BANNER E HOME (INDEX)
+   ======================================================= */
+.banner-destaque {
+    /* ALUNO: Personalize o fundo do banner inicial com cor ou imagem */
+    background-color: rgba(249, 246, 255, 0.35);
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.botao-acao, .btn-comprar, .btn-enviar {
+    display: inline-block;
+    background-color: #cfb9f0; /* ALUNO: Altere a cor dos botões principais */
+    color: rgb(69, 1, 63);
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.botao-acao:hover, .btn-comprar:hover, .btn-enviar:hover {
+    background-color: #059669;
+}
+
+.container-cards-destaque {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-destaque {
+    background-color: #3a2d32;
+    border: 1px solid #e5e7eb;
+    padding: 20px;
+    flex: 1;
+    border-radius: 6px;
+}
+
+/* =======================================================
+   4. HISTÓRIA E MVV
+   ======================================================= */
+.conteudo-historia {
+    margin-bottom: 40px;
+}
+
+.container-mvv {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.bloco-mvv {
+    background: #3a2d32;
+    border-top: 4px solid #452039; /* ALUNO: Detalhe de cor no topo dos blocos */
+    padding: 20px;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* =======================================================
+   5. GRADE DE PRODUTOS (CSS GRID)
+   ======================================================= */
+.grade-produtos {
+    /* CSS GRID: Cria colunas que se adaptam sozinhas à largura da tela */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.cartao-item {
+    background-color: #0a080a;
+    border: 1px solid #060606;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.cartao-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Impede que a imagem do produto fique esticada */
+}
+
+.preco-item {
+    color: #640c78;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* =======================================================
+   6. LOCALIZAÇÃO E TABELAS
+   ======================================================= */
+.secao-mapa, .secao-horarios {
+    margin-top: 30px;
+}
+
+.tabela-horarios {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #3a2d32;
+}
+
+.tabela-horarios th, .tabela-horarios td {
+    border: 1px solid #0d0c0d;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabela-horarios th {
+    background-color: #451531;
+    color: rgb(248, 243, 243);
+}
+
+/* =======================================================
+   7. FORMULÁRIO E CRÉDITOS DA EQUIPE
+   ======================================================= */
+.formulario-fale-conosco {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.campo-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.campo-form input, .campo-form select, .campo-form textarea {
+    padding: 10px;
+    border: 1px solid #0c0c0c;
+    border-radius: 4px;
+}
+.btn-enviar { background-color: #28a745;
+color:#ffffff;
+}
+.btn-enviar:hover {
+    background-color: #218838;
+}
+
+.galeria-desenvolvedores {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card-aluno {
+    background-color: #402323;
+    border: 1px solid #0b0a0a;
+    padding: 15px;
+    text-align: center;
+    border-radius: 6px;
+    width: 180px;
+}
+
+.card-aluno img {
+    border-radius: 50%; /* Torna as fotos dos alunos redondas */
+    margin-bottom: 10px;
+}
+
+/* =======================================================
+   8. RODAPÉ
+   ======================================================= */
+#rodape-principal {
+    background-color: #260224;
+    color: #96bcf1;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 14px;
+}
