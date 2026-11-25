@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Flex - Contato</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+      <!-- CABEÇALHO: Padrão em todas as páginas -->
+    <header id="cabecalho-principal">
+        <div class="logo">
+            <img src="logo1af.png" alt="logo" width="250" height="90">
+            <!-- ALUNO: Altere para o nome do seu estabelecimento ou troque a tag h1 por uma tag <img> -->
+
+        </div>
+        <nav class="menu-navegacao">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="historia.html">Nossa História</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="localizacao.html">Localização</a></li>
+                <li><a href="contato.html" class="link-ativo">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PARTE 1: Formulário de Contato para Clientes -->
+        <section class="secao-formulario">
+            <h1>Contato</h1>
+           <br>
+
+            <form class="formulario-fale-conosco">
+                <div class="campo-form">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="assunto">Assunto</label>
+
+                    <select id="assunto" name="assunto">
+                        <option value=""></option>
+                        <option value="duvida">Compra de Aparelhos </option>
+                        <option value="orcamento">Manutenção de equipamentos Apple</option>
+                        <option value="reclamacao">SAC</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="mensagem">Digite sua duvida</label>
+                    <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar">Enviar </button>
+            </form>
+        </section>
+
+        </br>
+
+        <hr class="divisor-secoes">
+
+            </br>
+
+
+        <!-- PARTE 2: Créditos Acadêmicos e Desenvolvedores (Integrantes do Grupo) -->
+        <section class="secao-creditos">
+            <h2>Créditos do Projeto e Desenvolvedores</h2>
+            <div class="info-disciplina">
+                <p><strong>Disciplina:</strong> HTML & CSS</p>
+                <!-- ALUNO: Digite o nome do seu professor -->
+                <p><strong>Professor Orientador:</strong> <a href="https://linktr.ee/marcelo.padilha">Prof. Marcelo Padilha</a></p>
+                <p><strong>Turma/Ano:</strong> Turma 204 - 2026</p>
+            </div>
+
+                </br>
+
+
+            <h3>Alunos Desenvolvedores:</h3>
+            <div class="galeria-desenvolvedores">
+                
+                <!-- INTEGRANTE 1 -->
+                <div class="card-aluno">
+                    <!-- ALUNO: Substitua a foto por um avatar ou foto do integrante -->
+                    <img src="https://i.pinimg.com/236x/69/36/c1/6936c18110f3e8c0555ac8339ace7067.jpg" alt="Foto do Aluno 1">
+                    <h4>Davi Silveira Brandl</h4>
+                    <p class="funcao-aluno">Líder do Projeto / Dev HTML</p>
+                </div>
+
+                <!-- INTEGRANTE 2 -->
+                <div class="card-aluno">
+                    <img src="https://static.wikia.nocookie.net/fortnite/images/1/1d/Nisha_(Character_Collection_Book)_-_Outfit_-_Fortnite.png/revision/latest/scale-to-width-down/268?cb=20240816154452" alt="Foto do Aluno 2">
+                    <h4>Philipe Faria</h4>
+                    <p class="funcao-aluno">Desenvolvedor CSS</p>
+                </div>
+
+                <!-- INTEGRANTE 3 -->
+                <div class="card-aluno">
+                    <img src="https://api.triviacreator.com/v1/imgs/quiz/download-876d6cc5-e685-4f8a-a624-00e36f5d6693.jpg" alt="Foto do Aluno 3">
+                    <h4>Ryan Oliveira Ventura</h4>
+                    <p class="funcao-aluno">Designer / Conteúdo</p>
+                </div>
+
+                <!-- INTEGRANTE 4 -->
+                <div class="card-aluno">
+                    <img src="https://i.pinimg.com/236x/12/a8/81/12a88158cd034780d140c70dd37493be.jpg" alt="Foto do Aluno 4">
+                    <h4>Gustavo Costa Souto</h4>
+                    <p class="funcao-aluno">Desenvolvedor HTML</p>
+                </div>
+
+                 <!-- INTEGRANTE 5 -->
+                <div class="card-aluno">
+                    <img src="https://i.pinimg.com/236x/a5/b1/6a/a5b16a850941f106d0e1bac852ba7576.jpg" alt="Foto do Aluno 5">
+                    <h4>Ismael Luiz</h4>
+                    <p class="funcao-aluno">Testes e Documentação</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+      <footer id="rodape-principal">
+        <p>&copy; 2026 - Apple Flex. Todos os direitos reservados.</p>
+        <p>Projeto Escolar desenvolvido para a disciplina de HTML/CSS - Prof. Marcelo Padilha.</p>
+        <p>Escola Estadual Nyrce Villa Verde Coelho de Magalhães</p>
+    </footer>
+
+
+</body>
+</html>
